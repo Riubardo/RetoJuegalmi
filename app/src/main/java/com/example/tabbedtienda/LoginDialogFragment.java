@@ -14,7 +14,23 @@ import android.widget.Toast;
 
 import androidx.fragment.app.DialogFragment;
 
-public class LoginDialogFragment extends DialogFragment
+import com.example.tabbedtienda.ui.datos.RetroFittLlamadas;
+import com.example.tabbedtienda.ui.models.Cliente;
+import com.example.tabbedtienda.ui.models.Plataforma;
+import com.example.tabbedtienda.ui.models.Usuario;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import java.util.List;
+
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
+public class LoginDialogFragment extends DialogFragment implements Callback<Usuario>
 {
 	private EditText editUsuario = null;
 	private EditText editPassword = null;
@@ -44,6 +60,18 @@ public class LoginDialogFragment extends DialogFragment
 				super.onCreateDialog(savedInstanceState);
 		dialog.setTitle("Login");
 		return dialog;
+	}
+	public void cargarDatos(String nomb, String contra){
+		Gson gson = new GsonBuilder()
+				.setLenient()
+				.create();
+		Retrofit retrofit = new Retrofit.Builder()
+				.baseUrl("https://arkadio.duckdns.org/ws/")
+				.addConverterFactory(GsonConverterFactory.create(gson))
+				.build();
+		RetroFittLlamadas retroFittLlamadas = retrofit.create(RetroFittLlamadas.class);
+		Call<Usuario> call = retroFittLlamadas.getLogin(nomb, contra);
+		call.enqueue(this);
 	}
 	//Crear la vista (instancias etc)
 	@Override
@@ -80,27 +108,26 @@ public class LoginDialogFragment extends DialogFragment
 			{
 				String usuario = editUsuario.getText().toString();
 				String password = editPassword.getText().toString();
-
-				if(((usuario.equals("Admin"))||(usuario.equals("Ruben")))&&(password.equals("Almi123"))){
-
-					//-----> Guardar usuario en el Bundle
-
-					Toast.makeText(getContext(), "Login Correcto", Toast.LENGTH_LONG).show();
-					Log.e("Login", "Login Correcto");
-					Log.i("Login", "Usuario: "+usuario);
-					Log.i("Login", "Password: "+password);
-					dismiss();
-				}else{Toast.makeText(getContext(), "Login Incorrecto", Toast.LENGTH_LONG).show();
-					Log.e("Login", "Login Incorrecto");
-					Log.i("Login", "Usuario: "+usuario);
-					Log.i("Login", "Password: "+password);
-					dismiss();
-					dismiss();
-				}
-
+				cargarDatos(usuario, password);
 				dismiss();
 			}
 		});
 
+	}
+
+	@Override
+	public void onResponse(Call<Usuario> call, Response<Usuario> response) {
+		if(response.isSuccessful()) {
+			Log.d("usu",response.body().getUsuario().toString());
+		} else {
+			Log.d("usu","error1");
+			System.out.println(response.errorBody());
+		}
+	}
+
+	@Override
+	public void onFailure(Call<Usuario> call, Throwable t) {
+		Log.d("usu","error2");
+		t.printStackTrace();
 	}
 }
