@@ -3,30 +3,20 @@ package com.example.tabbedtienda.ui.models;
 import java.io.Serializable;
 
 public class Usuario implements Serializable {
-    private Cliente cliente;
-    private Trabajador trabajador;
+    private Cliente usuario;
     private boolean admin;
 
-    public Usuario(Cliente cliente, Trabajador trabajador, boolean admin){
-        this.cliente=cliente;
-        this.trabajador=trabajador;
-        this.admin=admin;
+    public Usuario(Cliente usuario, boolean admin) {
+        this.usuario = usuario;
+        this.admin = admin;
     }
 
-    public Cliente getCliente() {
-        return cliente;
+    public Object getUsuario() {
+        return usuario;
     }
 
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
-
-    public Trabajador getTrabajador() {
-        return trabajador;
-    }
-
-    public void setTrabajador(Trabajador trabajador) {
-        this.trabajador = trabajador;
+    public void setUsuario(Cliente usuario) {
+        this.usuario = usuario;
     }
 
     public boolean isAdmin() {
