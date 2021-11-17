@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.notifications.NotificationsFragment">
+    tools:context=".GridPer">
 
     <GridView
-        android:id="@+id/grid_view_imagenes"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:numColumns="1"
-        android:horizontalSpacing="10dp"
-        android:gravity="center"/>
+        android:id="@+id/gridFotos"
+        android:layout_width="410dp"
+        android:layout_height="377dp"
+        android:numColumns="3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

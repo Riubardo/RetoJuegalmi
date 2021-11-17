@@ -1,9 +1,11 @@
 package com.example.tabbedtienda.ui.notifications;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,27 +17,27 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.tabbedtienda.R;
 import com.example.tabbedtienda.databinding.FragmentNotificationsBinding;
 
+import java.util.ArrayList;
+
 public class NotificationsFragment extends Fragment {
 
 	private NotificationsViewModel notificationsViewModel;
 	private FragmentNotificationsBinding binding;
+	GridView gridViewImagenes;
+	private Context context;
 
 	public View onCreateView(@NonNull LayoutInflater inflater,
 							 ViewGroup container, Bundle savedInstanceState) {
+
 		notificationsViewModel =
 				new ViewModelProvider(this).get(NotificationsViewModel.class);
 
 		binding = FragmentNotificationsBinding.inflate(inflater, container, false);
-		View root = binding.getRoot();
 
-		final TextView textView = binding.textNotifications;
-		notificationsViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-			@Override
-			public void onChanged(@Nullable String s) {
-				textView.setText(s);
-			}
-		});
-		return root;
+		View view =   inflater.inflate(R.layout.fragment_notifications,container,false);
+		gridViewImagenes = view.findViewById(R.id.grid_view_imagenes);
+
+		return view;
 	}
 
 	@Override
@@ -43,4 +45,6 @@ public class NotificationsFragment extends Fragment {
 		super.onDestroyView();
 		binding = null;
 	}
+
+
 }
