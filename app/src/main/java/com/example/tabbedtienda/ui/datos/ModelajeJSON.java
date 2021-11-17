@@ -1,5 +1,7 @@
 package com.example.tabbedtienda.ui.datos;
 
+import android.util.Log;
+
 import com.example.tabbedtienda.ui.models.Plataforma;
 import com.example.tabbedtienda.ui.models.Videojuego;
 
@@ -22,6 +24,7 @@ public class ModelajeJSON {
 			for (int i = 0; i < jsonArrayPlataformas.length(); i++) {
 				JSONObject miJsonPlataforma = jsonArrayPlataformas.getJSONObject(i);
 
+				Log.e("", "Plataforma: " + miJsonPlataforma.getString("plataforma"));
 					int miId = miJsonPlataforma.getInt("id");
 					String miNombre = miJsonPlataforma.getString("plataforma");
 					JSONArray miJsonVideojuegos = miJsonPlataforma.getJSONArray("juego");

@@ -79,8 +79,10 @@ public class AdaptadorPlataforma extends RecyclerView.Adapter<AdaptadorPlataform
 	// ----->> RELLENAR VISTAS CON LOS DATOS
 	@Override
 	public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
-		viewHolder.getTvNombre().setText(listaPlataformas.get(position).getPlataforma() + " (" + listaPlataformas.get(position).getListaVideojuegos().size() +" juegos) ->");
+		//viewHolder.getTvNombre().setText(listaPlataformas.get(position).getPlataforma() + " (" + listaPlataformas.get(position).getListaVideojuegos().size() +" juegos) ->");
+		viewHolder.getTvNombre().setText(listaPlataformas.get(position).getPlataforma() + " ("+ position +"/"+ listaPlataformas.size() +") ->");
 
+		Log.e("", listaPlataformas.get(position).getPlataforma() + " ("+ position +"/"+ listaPlataformas.size() +") ->");
 		final CategoriaDialog dialog = new CategoriaDialog((Plataforma)listaPlataformas.get(position));
 		viewHolder.getTvNombre().setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -91,7 +93,6 @@ public class AdaptadorPlataforma extends RecyclerView.Adapter<AdaptadorPlataform
 		});
 
 		//viewHolder.getTvId().setText("ID: " + listaPlataformas.get(position).getId());
-		//viewHolder.getTvCantidad().setText("Cantidad Juegos: " + listaPlataformas.get(position).getListaVideojuegos().size());
 
 
 		ArrayList<Videojuego> listaVideojuegos = listaPlataformas.get(position).getListaVideojuegos();

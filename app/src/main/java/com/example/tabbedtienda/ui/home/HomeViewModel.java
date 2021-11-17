@@ -59,6 +59,7 @@ public class HomeViewModel extends ViewModel implements Callback<List<Plataforma
 	public void onResponse(Call<List<Plataforma>> call, Response<List<Plataforma>> response) {
 		if(response.isSuccessful()) {
 			homeFragment.listaPlataformas = response.body();
+			Log.e("", ""+homeFragment.listaPlataformas.size());
 			homeFragment.setAdapter();
 		} else {
 			System.out.println(response.errorBody());
