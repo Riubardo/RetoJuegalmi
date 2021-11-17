@@ -1,19 +1,30 @@
 package com.example.tabbedtienda.ui.models;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Cliente implements Serializable {
-
+public class Cliente {
+    @SerializedName("id")
     private int id;
+    @SerializedName("nombre")
     private String nombre;
+    @SerializedName("apellido1")
     private String apellido1;
+    @SerializedName("apellido2")
     private String apellido2;
+    @SerializedName("telefono")
     private int telefono;
+    @SerializedName("email")
     private String email;
+    @SerializedName("contrasena")
     private String contrasena;
+    @SerializedName("imagen")
     private String imagen;
+    @SerializedName("latitud")
     private double latitud;
+    @SerializedName("longitud")
     private double longitud;
 
     public Cliente(int id, String nombre, String apellido1,String apellido2,int telefono,String email,String contrasena,String imagen,double latitud,double longitud){

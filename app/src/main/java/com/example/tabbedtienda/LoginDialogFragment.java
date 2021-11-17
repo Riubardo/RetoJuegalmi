@@ -1,7 +1,6 @@
 package com.example.tabbedtienda;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,18 +9,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.fragment.app.DialogFragment;
 
 import com.example.tabbedtienda.ui.datos.RetroFittLlamadas;
 import com.example.tabbedtienda.ui.models.Cliente;
-import com.example.tabbedtienda.ui.models.Plataforma;
+import com.example.tabbedtienda.ui.models.Login;
+import com.example.tabbedtienda.ui.models.Trabajador;
 import com.example.tabbedtienda.ui.models.Usuario;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
-import java.util.List;
 
 
 import retrofit2.Call;
@@ -30,7 +27,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class LoginDialogFragment extends DialogFragment implements Callback<Usuario>
+public class LoginDialogFragment extends DialogFragment
 {
 	private EditText editUsuario = null;
 	private EditText editPassword = null;
@@ -70,8 +67,32 @@ public class LoginDialogFragment extends DialogFragment implements Callback<Usua
 				.addConverterFactory(GsonConverterFactory.create(gson))
 				.build();
 		RetroFittLlamadas retroFittLlamadas = retrofit.create(RetroFittLlamadas.class);
-		Call<Usuario> call = retroFittLlamadas.getLogin(nomb, contra);
-		call.enqueue(this);
+		Login login = new Login(nomb, contra);
+		Call<Usuario> call = retroFittLlamadas.getLogin(login);
+		call.enqueue(new Callback<Usuario>() {
+			@Override
+			public void onResponse(Call<Usuario> call, Response<Usuario> response) {
+				if(response.isSuccessful()) {
+					if (response.body().isAdmin()){
+						Trabajador trabajador = Trabajador.class.cast(response.body().getTrabajador());
+						Log.d("usu",trabajador.getNombre());
+					}else{
+						Cliente cliente = Cliente.class.cast(response.body().getCliente());
+						Log.d("usu",cliente.getNombre());
+					}
+
+				} else {
+					Log.d("usu","error1");
+					System.out.println(response.errorBody());
+				}
+			}
+
+			@Override
+			public void onFailure(Call<Usuario> call, Throwable t) {
+				Log.d("usu","error2");
+				t.printStackTrace();
+			}
+		});
 	}
 	//Crear la vista (instancias etc)
 	@Override
@@ -113,21 +134,5 @@ public class LoginDialogFragment extends DialogFragment implements Callback<Usua
 			}
 		});
 
-	}
-
-	@Override
-	public void onResponse(Call<Usuario> call, Response<Usuario> response) {
-		if(response.isSuccessful()) {
-			Log.d("usu",response.body().getUsuario().toString());
-		} else {
-			Log.d("usu","error1");
-			System.out.println(response.errorBody());
-		}
-	}
-
-	@Override
-	public void onFailure(Call<Usuario> call, Throwable t) {
-		Log.d("usu","error2");
-		t.printStackTrace();
 	}
 }

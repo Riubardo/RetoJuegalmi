@@ -1,6 +1,7 @@
 package com.example.tabbedtienda.ui.datos;
 
 import com.example.tabbedtienda.ui.models.Cliente;
+import com.example.tabbedtienda.ui.models.Login;
 import com.example.tabbedtienda.ui.models.Plataforma;
 import com.example.tabbedtienda.ui.models.Usuario;
 
@@ -18,7 +19,6 @@ public interface RetroFittLlamadas {
     @GET("plataformas/stock")
     Call<List<Plataforma>> getPlataformas();
 
-    @FormUrlEncoded
-    @POST("usuario/login")
-    Call<Usuario> getLogin(@Field("usuario") String usuario, @Field("contra") String contra);
+    @POST("login")
+    Call<Usuario> getLogin(@Body Login login);
 }

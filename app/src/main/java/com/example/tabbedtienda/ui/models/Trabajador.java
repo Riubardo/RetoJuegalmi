@@ -1,19 +1,30 @@
 package com.example.tabbedtienda.ui.models;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 
-public class Trabajador implements Serializable {
+public class Trabajador {
+    @SerializedName("id")
     private int id;
+    @SerializedName("nombre")
     private String nombre;
+    @SerializedName("apellido1")
     private String apellido1;
+    @SerializedName("apellido2")
     private String apellido2;
+    @SerializedName("dni")
     private String dni;
+    @SerializedName("telefono")
     private int telefono;
+    @SerializedName("email")
     private String email;
+    @SerializedName("contrasena")
     private String contrasena;
+    @SerializedName("admin")
     private boolean admin;
 
-    public Trabajador(int id,String nombre, String apellido1, String apellido2, String dni, int telefono, String email, String contrasena, boolean admin){
+    public Trabajador(String nombre, String apellido1, String apellido2, String dni, int telefono, String email, String contrasena, boolean admin){
         this.id=id;
         this.nombre=nombre;
         this.apellido1=apellido1;
