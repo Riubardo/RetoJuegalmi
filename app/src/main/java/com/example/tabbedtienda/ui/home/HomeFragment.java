@@ -116,7 +116,7 @@ public class HomeFragment extends Fragment {
 	}
 
 
-	@Override
+	/*@Override
 	protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 
@@ -129,7 +129,7 @@ public class HomeFragment extends Fragment {
 				}
 			}
 		}
-	}
+	}*/
 
 	//Para buscar las palabras en google
 	private void realizarAcciones(String s){

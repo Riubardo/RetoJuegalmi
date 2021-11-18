@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,16 +7,8 @@
     tools:context=".ui.support.SupportFragment">
 
     <TextView
-        android:id="@+id/text_support"
+        android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:text="Lorem fistrum diodeno papaar papaar diodenoo benemeritaar pecador caballo blanco caballo negroorl no te digo trigo por no llamarte Rodrigor. A gramenawer diodenoo condemor a peich ese hombree al ataquerl. No te digo trigo por no llamarte Rodrigor a peich diodenoo al ataquerl qué dise usteer a peich. Ese que llega pupita hasta luego Lucas ese pedazo de se calle ustée mamaar me cago en tus muelas. No te digo trigo por no llamarte Rodrigor diodenoo llevame al sircoo pecador. Por la gloria de mi madre papaar papaar hasta luego Lucas papaar papaar fistro me cago en tus muelas tiene musho peligro está la cosa muy malar benemeritaar no puedor. Por la gloria de mi madre fistro quietooor no puedor jarl amatomaa. Tiene musho peligro torpedo ese pedazo de a gramenawer a peich ese hombree no te digo trigo por no llamarte Rodrigor no te digo trigo por no llamarte Rodrigor a gramenawer." />
+</LinearLayout>

@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.transition.TransitionInflater;
 
@@ -35,17 +36,18 @@ public class NotificationsFragment extends Fragment {
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
 							 @Nullable Bundle savedInstanceState) {
+		View vista = inflater.inflate(R.layout.fragment_notifications, container, false);
+		recyclerView=vista.findViewById(R.id.recycler);
+		recyclerView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL,false));
+		AdaptadorRecycler adaptadorGaleria = new AdaptadorRecycler(getActivity());
+		recyclerView.setAdapter(adaptadorGaleria);
 
-		return inflater.inflate(R.layout.fragment_notifications, container, false);
+
+		return vista;
 	}
 
 	@Override
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-		AdaptadorRecycler adaptadorGaleria = new AdaptadorRecycler(getChildFragmentManager());
-		recyclerView = new RecyclerView(getContext());
-		recyclerView.setAdapter(adaptadorGaleria);
-		recyclerView=view.findViewById(R.id.recycler);
-
 	}
 
 	@Override

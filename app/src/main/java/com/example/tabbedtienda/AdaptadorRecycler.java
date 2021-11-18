@@ -1,6 +1,7 @@
 package com.example.tabbedtienda;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,22 +13,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.tabbedtienda.ui.notifications.GaleriaFotos;
-import com.example.tabbedtienda.ui.notifications.LasFotos;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class AdaptadorRecycler extends RecyclerView.Adapter<AdaptadorRecycler.AdaptadorRecyclerViewHolder> {
-   // private List<GaleriaFotos> arrayGaleria;
     private Context contexto = null;
-    private FragmentManager fragmentmanager;
-    private ArrayList<LasFotos> arrayGaleria = new ArrayList<>();
+    private ArrayList<GaleriaFotos> arrayGaleria = llenarArray();
 
 
-    public AdaptadorRecycler(ArrayList<LasFotos> arrayGaleria, Context contexto, FragmentManager fragmentmanager) {
-        this.arrayGaleria = arrayGaleria;
+    public AdaptadorRecycler(Context contexto) {
         this.contexto = contexto;
-        this.fragmentmanager = fragmentmanager;
     }
 
     public class AdaptadorRecyclerViewHolder extends RecyclerView.ViewHolder {
@@ -39,26 +34,41 @@ public class AdaptadorRecycler extends RecyclerView.Adapter<AdaptadorRecycler.Ad
         }
     }
 
-    public AdaptadorRecycler(FragmentManager fragmentmanager) {
-        this.fragmentmanager = fragmentmanager;
-    }
+
 
     @NonNull
     @Override
     public AdaptadorRecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View vista = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_adaptador_recycler, null, false);
+
         return new AdaptadorRecyclerViewHolder(vista);
     }
 
     @Override
     public void onBindViewHolder(@NonNull AdaptadorRecyclerViewHolder holder, int position) {
-        LasFotos imagen = arrayGaleria.get(position);
-        Glide.with(contexto).load(imagen.getFoto()).centerCrop().into(holder.imgGaleria);
+        Log.d("algo", " "+arrayGaleria.get(position));
+        Glide.with(contexto).load(arrayGaleria.get(position).getFoto()).centerCrop().into(holder.imgGaleria);
     }
 
     @Override
     public int getItemCount() {
         return arrayGaleria.size();
+    }
+
+
+    public ArrayList<GaleriaFotos> llenarArray() {
+        ArrayList<GaleriaFotos> arrayGaleria = new ArrayList<GaleriaFotos>();
+        arrayGaleria.add(new GaleriaFotos("https://almi.eus/wp-content/uploads/2019/11/IMG_20191125_084551.jpg"));
+        arrayGaleria.add(new GaleriaFotos("https://almi.eus/wp-content/uploads/2019/11/IMG_20191125_084551.jpg"));
+        arrayGaleria.add(new GaleriaFotos("https://almi.eus/wp-content/uploads/2019/11/IMG_20191125_084551.jpg"));
+        arrayGaleria.add(new GaleriaFotos("https://almi.eus/wp-content/uploads/2019/11/IMG_20191125_084551.jpg"));
+        arrayGaleria.add(new GaleriaFotos("https://almi.eus/wp-content/uploads/2019/11/IMG_20191125_084551.jpg"));
+        arrayGaleria.add(new GaleriaFotos("https://almi.eus/wp-content/uploads/2019/11/IMG_20191125_084551.jpg"));
+        arrayGaleria.add(new GaleriaFotos("https://almi.eus/wp-content/uploads/2019/11/IMG_20191125_084551.jpg"));
+        arrayGaleria.add(new GaleriaFotos("https://almi.eus/wp-content/uploads/2019/11/IMG_20191125_084551.jpg"));
+        arrayGaleria.add(new GaleriaFotos("https://almi.eus/wp-content/uploads/2019/11/IMG_20191125_084551.jpg"));
+
+        return arrayGaleria;
     }
 
 }
