@@ -12,16 +12,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.tabbedtienda.ui.notifications.GaleriaFotos;
+import com.example.tabbedtienda.ui.notifications.LasFotos;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AdaptadorRecycler extends RecyclerView.Adapter<AdaptadorRecycler.AdaptadorRecyclerViewHolder> {
-    private List<GaleriaFotos> arrayGaleria;
+   // private List<GaleriaFotos> arrayGaleria;
     private Context contexto = null;
     private FragmentManager fragmentmanager;
+    private ArrayList<LasFotos> arrayGaleria = new ArrayList<>();
 
 
-    public AdaptadorRecycler(List<GaleriaFotos> arrayGaleria, Context contexto, FragmentManager fragmentmanager) {
+    public AdaptadorRecycler(ArrayList<LasFotos> arrayGaleria, Context contexto, FragmentManager fragmentmanager) {
         this.arrayGaleria = arrayGaleria;
         this.contexto = contexto;
         this.fragmentmanager = fragmentmanager;
@@ -49,7 +52,7 @@ public class AdaptadorRecycler extends RecyclerView.Adapter<AdaptadorRecycler.Ad
 
     @Override
     public void onBindViewHolder(@NonNull AdaptadorRecyclerViewHolder holder, int position) {
-        GaleriaFotos imagen = arrayGaleria.get(position);
+        LasFotos imagen = arrayGaleria.get(position);
         Glide.with(contexto).load(imagen.getFoto()).centerCrop().into(holder.imgGaleria);
     }
 

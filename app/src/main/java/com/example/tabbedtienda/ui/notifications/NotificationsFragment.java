@@ -27,7 +27,6 @@ public class NotificationsFragment extends Fragment {
 	private NotificationsViewModel notificationsViewModel;
 	RecyclerView recyclerView;
 	private Context context;
-	AdaptadorRecycler adaptador;
 
 	public static NotificationsFragment newInstance() {
 		return new NotificationsFragment();

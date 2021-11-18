@@ -18,7 +18,7 @@ import java.util.ArrayList;
 public class LasFotos extends Fragment {
 
     private ArrayList<GaleriaFotos> arrayGaleria = new ArrayList<>();
-
+    private String foto;
     public LasFotos() {
         llenarArray();
     }
@@ -51,5 +51,8 @@ public class LasFotos extends Fragment {
         arrayGaleria.add(new GaleriaFotos("https://almi.eus/wp-content/uploads/2019/11/IMG_20191125_084551.jpg"));
 
 
+    }
+    public String getFoto() {
+        return foto;
     }
 }
