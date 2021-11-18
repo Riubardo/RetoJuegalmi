@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.example.tabbedtienda.databinding.ActivityMainBinding;
+import com.example.tabbedtienda.ui.models.Usuario;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,13 +16,14 @@ import androidx.navigation.ui.NavigationUI;
 
 
 public class MainActivity extends AppCompatActivity{
-
+	public static MainActivity mainActivity;
 	private ActivityMainBinding binding;
+	private Usuario logeado = null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
+		mainActivity = this;
 		binding = ActivityMainBinding.inflate(getLayoutInflater());
 		setContentView(binding.getRoot());
 
@@ -40,4 +42,11 @@ public class MainActivity extends AppCompatActivity{
 		NavigationUI.setupWithNavController(binding.navView, navController);
 	}
 
+	public Usuario getLogeado() {
+		return logeado;
+	}
+
+	public void setLogeado(Usuario logeado) {
+		this.logeado = logeado;
+	}
 }

@@ -57,14 +57,7 @@ public class AdaptadorVideojuego extends RecyclerView.Adapter<AdaptadorVideojueg
 	@Override
 	public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
 		//viewHolder.getTvNombre().setText(listaVideojuegos.get(position).getNombreJuego() + "(" + position+1 + "/" + this.getItemCount() +")");
-
 		viewHolder.getTvNombre().setText(listaVideojuegos.get(position).getNombre());
-		//viewHolder.getTvId().setText("ID: " + listaVideojuegos.get(position).getId());
-		viewHolder.getTvPrecio().setText("Precio: " + listaVideojuegos.get(position).getPrecioVenta());
-
-		//Glide.with(viewHolder.getC).load(listaVideojuegos.get(position).getUrlImagenGoogle()).centerCrop().into(viewHolder.getImage());
-
-
 	}
 
 	@Override

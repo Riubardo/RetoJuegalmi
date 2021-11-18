@@ -80,7 +80,7 @@ public class AdaptadorPlataforma extends RecyclerView.Adapter<AdaptadorPlataform
 	@Override
 	public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
 		//viewHolder.getTvNombre().setText(listaPlataformas.get(position).getPlataforma() + " (" + listaPlataformas.get(position).getListaVideojuegos().size() +" juegos) ->");
-		viewHolder.getTvNombre().setText(listaPlataformas.get(position).getPlataforma() + " ("+ position +"/"+ listaPlataformas.size() +") ->");
+		viewHolder.getTvNombre().setText(listaPlataformas.get(position).getPlataforma() + ":");
 
 		Log.e("", listaPlataformas.get(position).getPlataforma() + " ("+ position +"/"+ listaPlataformas.size() +") ->");
 		final CategoriaDialog dialog = new CategoriaDialog((Plataforma)listaPlataformas.get(position));

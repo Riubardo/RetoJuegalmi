@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.tabbedtienda.ui.datos.RetroFittLlamadas;
@@ -50,6 +51,7 @@ public class LoginDialogFragment extends DialogFragment
 	{
 		super.onDetach();
 	}
+	@NonNull
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState)
 	{
@@ -73,31 +75,23 @@ public class LoginDialogFragment extends DialogFragment
 			@Override
 			public void onResponse(Call<Usuario> call, Response<Usuario> response) {
 				if(response.isSuccessful()) {
-					if (response.body().isAdmin()){
-						Trabajador trabajador = Trabajador.class.cast(response.body().getTrabajador());
-						Log.d("usu",trabajador.getNombre());
-					}else{
-						Cliente cliente = Cliente.class.cast(response.body().getCliente());
-						Log.d("usu",cliente.getNombre());
-					}
-
+					Usuario usuario = response.body();
+					if (usuario.getCliente() != null || usuario.getTrabajador() != null)
+						MainActivity.mainActivity.setLogeado(usuario);
 				} else {
-					Log.d("usu","error1");
 					System.out.println(response.errorBody());
 				}
 			}
 
 			@Override
 			public void onFailure(Call<Usuario> call, Throwable t) {
-				Log.d("usu","error2");
 				t.printStackTrace();
 			}
 		});
 	}
 	//Crear la vista (instancias etc)
 	@Override
-	public View onCreateView(LayoutInflater inflater,
-							 ViewGroup container, Bundle savedInstanceState)
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 	{
 		View vista = (View)
 				inflater.inflate(R.layout.dialog_login, container,

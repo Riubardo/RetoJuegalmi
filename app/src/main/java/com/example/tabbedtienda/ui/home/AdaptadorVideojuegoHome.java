@@ -1,6 +1,7 @@
 package com.example.tabbedtienda.ui.home;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +14,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.tabbedtienda.MainActivity;
 import com.example.tabbedtienda.R;
+import com.example.tabbedtienda.ui.models.Usuario;
 import com.example.tabbedtienda.ui.models.Videojuego;
 
 import java.util.ArrayList;
@@ -83,7 +86,6 @@ public class AdaptadorVideojuegoHome extends RecyclerView.Adapter<AdaptadorVideo
 			@Override
 			public void onClick(View v) {
 				dialog.show( fragment.getChildFragmentManager(), "Ver Producto");
-
 			}
 		});
 

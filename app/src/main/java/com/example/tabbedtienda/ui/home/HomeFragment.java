@@ -15,7 +15,9 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.tabbedtienda.LogedDialogFragment;
 import com.example.tabbedtienda.LoginDialogFragment;
+import com.example.tabbedtienda.MainActivity;
 import com.example.tabbedtienda.R;
 import com.example.tabbedtienda.databinding.FragmentHomeBinding;
 import com.example.tabbedtienda.ui.datos.ModelajeJSON;
@@ -73,8 +75,13 @@ public class HomeFragment extends Fragment {
 		userButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				dialog = new LoginDialogFragment();
-				dialog.show(fragmentManager, "login");
+				if (MainActivity.mainActivity.getLogeado() == null){
+					dialog = new LoginDialogFragment();
+					dialog.show(fragmentManager, "login");
+				}else {
+					LogedDialogFragment loged = new LogedDialogFragment();
+					loged.show(fragmentManager,"loged");
+				}
 
 			}
 		});
