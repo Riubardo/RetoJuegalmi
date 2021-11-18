@@ -10,14 +10,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
+import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.tabbedtienda.ui.datos.RetroFittLlamadas;
-import com.example.tabbedtienda.ui.models.Cliente;
-import com.example.tabbedtienda.ui.models.Plataforma;
 import com.example.tabbedtienda.ui.models.Usuario;
+import com.example.tabbedtienda.ui.notifications.GaleriaFotos;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -130,4 +133,5 @@ public class LoginDialogFragment extends DialogFragment implements Callback<Usua
 		Log.d("usu","error2");
 		t.printStackTrace();
 	}
+
 }
