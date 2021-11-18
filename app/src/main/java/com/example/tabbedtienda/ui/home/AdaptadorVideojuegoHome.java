@@ -30,7 +30,7 @@ public class AdaptadorVideojuegoHome extends RecyclerView.Adapter<AdaptadorVideo
 	// -----> CLASE VIEWHOLDER
 	public static class ViewHolder extends RecyclerView.ViewHolder {
 
-		private final TextView nombreVideojuego, precioVideojuego;
+		private final TextView nombreVideojuego;
 		private Context context;
 		private ImageView image;
 		private CardView card;
@@ -41,7 +41,6 @@ public class AdaptadorVideojuegoHome extends RecyclerView.Adapter<AdaptadorVideo
 			// Define click listener for the ViewHolder's View -> ???
 			nombreVideojuego = (TextView) view.findViewById(R.id.nombreVideojuego);
 			//idVideojuego = (TextView) view.findViewById(R.id.idVideojuego);
-			precioVideojuego = (TextView) view.findViewById(R.id.precioVideojuego);
 			image = (ImageView) view.findViewById(R.id.itemImage);
 			card = (CardView) view.findViewById(R.id.cardVideojuego);
 			this.context = context;
@@ -49,7 +48,6 @@ public class AdaptadorVideojuegoHome extends RecyclerView.Adapter<AdaptadorVideo
 
 		public TextView getTvNombre() { return nombreVideojuego; }
 		//public TextView getTvId() { return idVideojuego; }
-		public TextView getTvPrecio() { return precioVideojuego; }
 		public ImageView getImage() { return image; }
 		public CardView getCard() { return card; }
 	}
@@ -77,7 +75,6 @@ public class AdaptadorVideojuegoHome extends RecyclerView.Adapter<AdaptadorVideo
 
 		viewHolder.getTvNombre().setText(listaVideojuegos.get(position).getNombre());
 		//viewHolder.getTvId().setText("ID: " + listaVideojuegos.get(position).getId());
-		viewHolder.getTvPrecio().setText("Precio: " + listaVideojuegos.get(position).getPrecioVenta());
 		Glide.with(viewHolder.context).load(listaVideojuegos.get(position).getImagen()).centerCrop().into(viewHolder.getImage());
 
 		final ProductoDialog dialog = new ProductoDialog(fragment, (Videojuego)listaVideojuegos.get(position));

@@ -23,7 +23,7 @@ public class AdaptadorVideojuegoDialogo extends RecyclerView.Adapter<AdaptadorVi
 	// -----> CLASE VIEWHOLDER
 	public static class ViewHolder extends RecyclerView.ViewHolder {
 
-		private final TextView nombreVideojuego, precioVideojuego;
+		private final TextView nombreVideojuego;
 		private Context context;
 		public ViewHolder(View view, Context context){
 			super(view);
@@ -31,13 +31,11 @@ public class AdaptadorVideojuegoDialogo extends RecyclerView.Adapter<AdaptadorVi
 			// Define click listener for the ViewHolder's View -> ???
 			nombreVideojuego = (TextView) view.findViewById(R.id.nombreVideojuego);
 			//idVideojuego = (TextView) view.findViewById(R.id.idVideojuego);
-			precioVideojuego = (TextView) view.findViewById(R.id.precioVideojuego);
 			this.context = context;
 		}
 
 		public TextView getTvNombre() { return nombreVideojuego; }
 		//public TextView getTvId() { return idVideojuego; }
-		public TextView getTvPrecio() { return precioVideojuego; }
 	}
 
 	// -----> CONSTRUCTOR ADAPTADOR: PIDE ARRAYLIST DE PLATAFORMAS
@@ -63,7 +61,6 @@ public class AdaptadorVideojuegoDialogo extends RecyclerView.Adapter<AdaptadorVi
 
 		viewHolder.getTvNombre().setText(listaVideojuegos.get(position).getNombre());
 		//viewHolder.getTvId().setText("ID: " + listaVideojuegos.get(position).getId());
-		viewHolder.getTvPrecio().setText("Precio: " + listaVideojuegos.get(position).getPrecioVenta());
 		//Glide.with(viewHolder.getC).load(listaVideojuegos.get(position).getUrlImagenGoogle()).centerCrop().into(viewHolder.getImage());
 
 		final ProductoDialog dialog = new ProductoDialog(fragment, (Videojuego)listaVideojuegos.get(position));

@@ -82,7 +82,6 @@ public class AdaptadorPlataforma extends RecyclerView.Adapter<AdaptadorPlataform
 		//viewHolder.getTvNombre().setText(listaPlataformas.get(position).getPlataforma() + " (" + listaPlataformas.get(position).getListaVideojuegos().size() +" juegos) ->");
 		viewHolder.getTvNombre().setText(listaPlataformas.get(position).getPlataforma() + ":");
 
-		Log.e("", listaPlataformas.get(position).getPlataforma() + " ("+ position +"/"+ listaPlataformas.size() +") ->");
 		final CategoriaDialog dialog = new CategoriaDialog((Plataforma)listaPlataformas.get(position));
 		viewHolder.getTvNombre().setOnClickListener(new View.OnClickListener() {
 			@Override
