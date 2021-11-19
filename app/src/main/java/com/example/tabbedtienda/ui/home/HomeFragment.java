@@ -1,5 +1,7 @@
 package com.example.tabbedtienda.ui.home;
 
+import static android.app.appsearch.AppSearchResult.RESULT_OK;
+
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -54,7 +56,7 @@ public class HomeFragment extends Fragment {
 
 	private LoginDialogFragment dialog = null;
 	private HomeViewModel homeViewModel;
-	private FragmentHomeBinding binding;
+
 
 	public FragmentManager getHomeFM(){
 		return fragmentManager;
@@ -108,16 +110,13 @@ public class HomeFragment extends Fragment {
 		});
 
 
-
-		//loadPlataformas(); <- vacio, mas adelante cargar datos acá
-
 		return view;
 
 	}
 
 
-	/*@Override
-	protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 
 		ArrayList<String> arrayResultado;
@@ -129,9 +128,8 @@ public class HomeFragment extends Fragment {
 				}
 			}
 		}
-	}*/
+	}
 
-	//Para buscar las palabras en google
 	private void realizarAcciones(String s){
 		try {
 			String palabraBuscar = URLEncoder.encode(s, "UTF-8");
@@ -161,7 +159,6 @@ public class HomeFragment extends Fragment {
 	@Override
 	public void onDestroyView() {
 		super.onDestroyView();
-		binding = null;
 	}
 
 }
