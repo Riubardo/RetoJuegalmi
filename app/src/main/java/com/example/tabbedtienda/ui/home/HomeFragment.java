@@ -1,47 +1,33 @@
 package com.example.tabbedtienda.ui.home;
 
-import static android.app.appsearch.AppSearchResult.RESULT_OK;
-
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.speech.RecognizerIntent;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.Filter;
 import android.widget.ImageButton;
 import android.widget.SearchView;
-
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.tabbedtienda.LogedDialogFragment;
 import com.example.tabbedtienda.LoginDialogFragment;
 import com.example.tabbedtienda.MainActivity;
 import com.example.tabbedtienda.R;
-import com.example.tabbedtienda.databinding.FragmentHomeBinding;
-import com.example.tabbedtienda.ui.datos.ModelajeJSON;
 import com.example.tabbedtienda.ui.datos.RetroFittLlamadas;
-import com.example.tabbedtienda.ui.models.Login;
+import com.example.tabbedtienda.ui.models.Llamadas.Login;
+import com.example.tabbedtienda.ui.models.ModeloDispositivo;
+import com.example.tabbedtienda.ui.models.ModeloVideojuego;
 import com.example.tabbedtienda.ui.models.Plataforma;
+import com.example.tabbedtienda.ui.models.ResultadoBuscada;
 import com.example.tabbedtienda.ui.models.Usuario;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,7 +36,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-
 
 public class HomeFragment extends Fragment {
 
@@ -64,8 +49,7 @@ public class HomeFragment extends Fragment {
 	public FragmentManager fragmentManager;
 
 	private SearchView buscador;
-	ArrayList<Plataforma> array = new ArrayList<>();
-	ArrayList<Plataforma> filteredarray = new ArrayList<>();
+	ResultadoBuscada resultadoBusqueda = new ResultadoBuscada(new ArrayList<ModeloVideojuego>(), new ArrayList<ModeloDispositivo>());
 
 
 	private LoginDialogFragment dialog = null;
@@ -93,17 +77,16 @@ public class HomeFragment extends Fragment {
 		homeViewModel.devuelveLista();
 
 		buscador = (SearchView) view.findViewById(R.id.searchView);
-
-
 		buscador.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 			@Override
 			public boolean onQueryTextSubmit(String s) {
+
+
 				return false;
 			}
 
 			@Override
 			public boolean onQueryTextChange(String s) {
-				getFilter().filter(s);
 				return false;
 			}
 		});
@@ -139,38 +122,35 @@ public class HomeFragment extends Fragment {
 		fragmentManager = getChildFragmentManager();
 	}
 
-	public Filter getFilter(){
-		return new Filter(){
 
+
+	public void buscar(String s){
+		Gson gson = new GsonBuilder()
+				.setLenient()
+				.create();
+		Retrofit retrofit = new Retrofit.Builder()
+				.baseUrl("https://arkadio.duckdns.org/ws/")
+				.addConverterFactory(GsonConverterFactory.create(gson))
+				.build();
+		RetroFittLlamadas retroFittLlamadas = retrofit.create(RetroFittLlamadas.class);
+		Call<ResultadoBuscada> call = retroFittLlamadas.getBusqueda(s);
+		call.enqueue(new Callback<ResultadoBuscada>() {
 			@Override
-			protected FilterResults performFiltering(CharSequence charSequence) {
-				String searhString = charSequence.toString();
+			public void onResponse(Call<ResultadoBuscada> call, Response<ResultadoBuscada> response) {
+				if(response.isSuccessful()) {
+					resultadoBusqueda = response.body();
+					dia
 
-				if(searhString.isEmpty()){
-
-					filteredarray = array;
-				}else{
-					ArrayList<Plataforma> tempFilteredList = new ArrayList<>();
-
-					for (Plataforma plataforma : array){
-
-						if(plataforma.getListaVideojuegos().contains(searhString)){
-							tempFilteredList.add(plataforma);
-						}
-					}
-					filteredarray = tempFilteredList;
+				} else {
+					System.out.println(response.errorBody());
 				}
-				FilterResults filterResults = new FilterResults();
-				filterResults.values = filteredarray;
-				return filterResults;
 			}
 
 			@Override
-			protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-				filteredarray = (ArrayList<Plataforma>) filterResults.values;
-				rvAdapter.notifyDataSetChanged();
+			public void onFailure(Call<ResultadoBuscada> call, Throwable t) {
+				t.printStackTrace();
 			}
-		};
+		});
 	}
 
 	@Override
