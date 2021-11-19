@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tabbedtienda.R;
 import com.example.tabbedtienda.ui.models.Plataforma;
-import com.example.tabbedtienda.ui.models.Videojuego;
+import com.example.tabbedtienda.ui.models.ModeloVideojuego;
 
 import java.util.ArrayList;
 
@@ -27,7 +27,7 @@ public class CategoriaDialog extends DialogFragment {
 	private ImageButton flechaAtras;
 	private TextView tvNombreCategoria;
 	private AdaptadorVideojuegoHome adaptadorVideojuegoHome;
-	private ArrayList<Videojuego> listaVideojuegos;
+	private ArrayList<ModeloVideojuego> listaModeloVideojuegos;
 	private Plataforma categoria;
 
 	//-----> Cosas del Recycler
@@ -39,7 +39,7 @@ public class CategoriaDialog extends DialogFragment {
 	public CategoriaDialog(Plataforma categoria){
 		super();
 		this.categoria = categoria;
-		this.listaVideojuegos = categoria.getListaVideojuegos();
+		this.listaModeloVideojuegos = categoria.getListaVideojuegos();
 	}
 
 	@Override
@@ -84,7 +84,7 @@ public class CategoriaDialog extends DialogFragment {
 
 
 		//-----> RELLENAR RECYCLER VIEW
-		rvAdapterVideojuego = new AdaptadorVideojuegoHome(this, listaVideojuegos);
+		rvAdapterVideojuego = new AdaptadorVideojuegoHome(this, listaModeloVideojuegos);
 
 		LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
 		recyclerViewVideojuego.setLayoutManager(layoutManager);

@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.tabbedtienda.R;
-import com.example.tabbedtienda.ui.models.Videojuego;
+import com.example.tabbedtienda.ui.models.ModeloVideojuego;
 
 import java.util.ArrayList;
 
@@ -28,8 +28,8 @@ public class ProductoDialog extends DialogFragment {
 	private TextView tvNombreProducto;
 	private ImageView ivImagenProducto;
 	private TextView tvDescripcionProducto;
-	private ArrayList<Videojuego> listaVideojuegos;
-	private Videojuego videojuego;
+	private ArrayList<ModeloVideojuego> listaModeloVideojuegos;
+	private ModeloVideojuego modeloVideojuego;
 
 	//-----> Cosas del Recycler
 	RecyclerView recyclerViewVideojuego;
@@ -37,10 +37,10 @@ public class ProductoDialog extends DialogFragment {
 	RecyclerView.LayoutManager rvLayoutMangerVideojuego;
 	Fragment fragment;
 
-	public ProductoDialog(Fragment fragment, Videojuego videojuego){
+	public ProductoDialog(Fragment fragment, ModeloVideojuego modeloVideojuego){
 		super();
 		this.fragment = fragment;
-		this.videojuego = videojuego;
+		this.modeloVideojuego = modeloVideojuego;
 	}
 
 	@Override
@@ -68,9 +68,9 @@ public class ProductoDialog extends DialogFragment {
 		tvDescripcionProducto = (TextView) vista.findViewById(R.id.descripcionProducto);
 
 		//-----> DATOS VIDEOJUEGO
-		tvNombreProducto.setText(videojuego.getNombre());
-		Glide.with(fragment.getContext()).load(videojuego.getImagen()).centerCrop().into(ivImagenProducto);
-		tvDescripcionProducto.setText(videojuego.getDescripcion());
+		tvNombreProducto.setText(modeloVideojuego.getNombre());
+		Glide.with(fragment.getContext()).load(modeloVideojuego.getImagen()).centerCrop().into(ivImagenProducto);
+		tvDescripcionProducto.setText(modeloVideojuego.getDescripcion());
 
 
 		return vista;

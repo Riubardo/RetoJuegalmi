@@ -3,7 +3,7 @@ package com.example.tabbedtienda.ui.datos;
 import android.util.Log;
 
 import com.example.tabbedtienda.ui.models.Plataforma;
-import com.example.tabbedtienda.ui.models.Videojuego;
+import com.example.tabbedtienda.ui.models.ModeloVideojuego;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -28,11 +28,10 @@ public class ModelajeJSON {
 					int miId = miJsonPlataforma.getInt("id");
 					String miNombre = miJsonPlataforma.getString("plataforma");
 					JSONArray miJsonVideojuegos = miJsonPlataforma.getJSONArray("juego");
-					ArrayList<Videojuego> miListaVideojuegos = new ArrayList<Videojuego>();
+					ArrayList<ModeloVideojuego> miListaModeloVideojuegos = new ArrayList<ModeloVideojuego>();
 					for (int j = 0; j < miJsonVideojuegos.length(); j++){
 						JSONObject miJsonVideojuego = miJsonVideojuegos.getJSONObject(j);
-						miListaVideojuegos.add(new Videojuego(
-								miJsonVideojuego.getInt("id"),
+						miListaModeloVideojuegos.add(new ModeloVideojuego(
 								miJsonVideojuego.getString("nombre"),
 								miJsonVideojuego.getString("descripcion"),
 								miJsonVideojuego.getInt("pegi"),
@@ -44,9 +43,8 @@ public class ModelajeJSON {
 					}
 
 				Plataforma miPlataforma = new Plataforma(
-						miJsonPlataforma.getInt("id"),
 						miJsonPlataforma.getString("plataforma"),
-						miListaVideojuegos
+						miListaModeloVideojuegos
 				);
 
 				listaPlataformas.add(miPlataforma);

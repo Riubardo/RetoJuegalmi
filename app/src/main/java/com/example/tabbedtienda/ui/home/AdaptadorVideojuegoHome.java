@@ -1,7 +1,6 @@
 package com.example.tabbedtienda.ui.home;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,16 +13,14 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.tabbedtienda.MainActivity;
 import com.example.tabbedtienda.R;
-import com.example.tabbedtienda.ui.models.Usuario;
-import com.example.tabbedtienda.ui.models.Videojuego;
+import com.example.tabbedtienda.ui.models.ModeloVideojuego;
 
 import java.util.ArrayList;
 
 public class AdaptadorVideojuegoHome extends RecyclerView.Adapter<AdaptadorVideojuegoHome.ViewHolder> {
 
-	private ArrayList<Videojuego> listaVideojuegos;
+	private ArrayList<ModeloVideojuego> listaModeloVideojuegos;
 	private String tipoVista;
 	private Fragment fragment;
 
@@ -53,8 +50,8 @@ public class AdaptadorVideojuegoHome extends RecyclerView.Adapter<AdaptadorVideo
 	}
 
 	// -----> CONSTRUCTOR ADAPTADOR: PIDE ARRAYLIST DE PLATAFORMAS
-	public AdaptadorVideojuegoHome(Fragment fragment, ArrayList<Videojuego> dataSet) {
-		listaVideojuegos = dataSet;
+	public AdaptadorVideojuegoHome(Fragment fragment, ArrayList<ModeloVideojuego> dataSet) {
+		listaModeloVideojuegos = dataSet;
 		this.fragment = fragment;
 	}
 
@@ -73,11 +70,11 @@ public class AdaptadorVideojuegoHome extends RecyclerView.Adapter<AdaptadorVideo
 	public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
 		//viewHolder.getTvNombre().setText(listaVideojuegos.get(position).getNombreJuego() + "(" + position+1 + "/" + this.getItemCount() +")");
 
-		viewHolder.getTvNombre().setText(listaVideojuegos.get(position).getNombre());
+		viewHolder.getTvNombre().setText(listaModeloVideojuegos.get(position).getNombre());
 		//viewHolder.getTvId().setText("ID: " + listaVideojuegos.get(position).getId());
-		Glide.with(viewHolder.context).load(listaVideojuegos.get(position).getImagen()).centerCrop().into(viewHolder.getImage());
+		Glide.with(viewHolder.context).load(listaModeloVideojuegos.get(position).getImagen()).centerCrop().into(viewHolder.getImage());
 
-		final ProductoDialog dialog = new ProductoDialog(fragment, (Videojuego)listaVideojuegos.get(position));
+		final ProductoDialog dialog = new ProductoDialog(fragment, (ModeloVideojuego) listaModeloVideojuegos.get(position));
 
 		viewHolder.getCard().setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -90,7 +87,7 @@ public class AdaptadorVideojuegoHome extends RecyclerView.Adapter<AdaptadorVideo
 
 	@Override
 	public int getItemCount() {
-		return listaVideojuegos.size();
+		return listaModeloVideojuegos.size();
 	}
 
 }

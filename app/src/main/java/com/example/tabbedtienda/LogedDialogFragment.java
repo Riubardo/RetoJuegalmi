@@ -49,6 +49,7 @@ public class LogedDialogFragment  extends DialogFragment {
             ((TextView)view.findViewById(R.id.txtLogedNombre)).setText(usu.getCliente().getNombre());
             ((TextView)view.findViewById(R.id.txtLogedCorreo)).setText(usu.getCliente().getEmail());
             byte[] bytesImage = Base64.decode(usu.getCliente().getImagen(), Base64.DEFAULT);
+            Log.d("img",bytesImage.length + "");
             Glide.with(this).asBitmap().load(bytesImage).into((ImageView) view.findViewById(R.id.imgLogedPerfil));
            // Glide.with(this).load(usu.getCliente().getImagen()).into((ImageView)view.findViewById(R.id.imgLogedPerfil));
         }
