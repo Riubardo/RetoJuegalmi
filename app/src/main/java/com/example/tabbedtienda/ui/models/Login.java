@@ -8,6 +8,9 @@ public class Login {
         this.contra = contra;
     }
 
+    public Login() {
+    }
+
     public String getUsuario() {
         return usuario;
     }
