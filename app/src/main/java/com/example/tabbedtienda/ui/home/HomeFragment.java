@@ -9,9 +9,13 @@ import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.Filter;
 import android.widget.ImageButton;
 import android.widget.SearchView;
 
@@ -29,14 +33,23 @@ import com.example.tabbedtienda.MainActivity;
 import com.example.tabbedtienda.R;
 import com.example.tabbedtienda.databinding.FragmentHomeBinding;
 import com.example.tabbedtienda.ui.datos.ModelajeJSON;
+import com.example.tabbedtienda.ui.datos.RetroFittLlamadas;
+import com.example.tabbedtienda.ui.models.Login;
 import com.example.tabbedtienda.ui.models.Plataforma;
+import com.example.tabbedtienda.ui.models.Usuario;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
-
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class HomeFragment extends Fragment {
@@ -51,8 +64,9 @@ public class HomeFragment extends Fragment {
 	public FragmentManager fragmentManager;
 
 	private SearchView buscador;
-	public static final int VOZ = 1;
-	private EditText etTexto;
+	ArrayList<Plataforma> array = new ArrayList<>();
+	ArrayList<Plataforma> filteredarray = new ArrayList<>();
+
 
 	private LoginDialogFragment dialog = null;
 	private HomeViewModel homeViewModel;
@@ -66,7 +80,6 @@ public class HomeFragment extends Fragment {
 
 		homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
 
-
 		View view = inflater.inflate(R.layout.fragment_home, null);
 
 		// RecyclerView Categoria Setup
@@ -79,20 +92,21 @@ public class HomeFragment extends Fragment {
 		homeViewModel.homeFragment = this;
 		homeViewModel.devuelveLista();
 
-		buscador = (SearchView) view.findViewById(R.id.searchView) ;
-		buscador.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				Intent abrir = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-				abrir.putExtra(RecognizerIntent.EXTRA_PROMPT, "Ahora puedes hablar...");
+		buscador = (SearchView) view.findViewById(R.id.searchView);
 
-				//Para que reconozca el idioma
-				abrir.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-				startActivityForResult(abrir, VOZ);
+
+		buscador.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+			@Override
+			public boolean onQueryTextSubmit(String s) {
+				return false;
+			}
+
+			@Override
+			public boolean onQueryTextChange(String s) {
+				getFilter().filter(s);
+				return false;
 			}
 		});
-
-
 
 		userButton = (ImageButton) view.findViewById(R.id.userButton);
 		userButton.setOnClickListener(new View.OnClickListener() {
@@ -114,37 +128,6 @@ public class HomeFragment extends Fragment {
 
 	}
 
-
-	@Override
-	public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-		super.onActivityResult(requestCode, resultCode, data);
-
-		ArrayList<String> arrayResultado;
-		if (requestCode == VOZ){
-			if (resultCode == RESULT_OK){
-				if (data != null){
-					arrayResultado = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-					etTexto.setText(arrayResultado.get(0));
-				}
-			}
-		}
-	}
-
-	private void realizarAcciones(String s){
-		try {
-			String palabraBuscar = URLEncoder.encode(s, "UTF-8");
-
-			//uri es una direccion de internet
-			Uri uri = Uri.parse("https://www.google.com/search?q=" + palabraBuscar);
-
-			Intent abrir = new Intent(Intent.ACTION_VIEW, uri);
-			startActivity(abrir);
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}
-	}
-
-
 	public void setAdapter(){
 		rvAdapter = new AdaptadorPlataforma(this, listaPlataformas);
 		recyclerView.setAdapter(rvAdapter);
@@ -154,6 +137,40 @@ public class HomeFragment extends Fragment {
 		super.onAttach(context);
 		this.context=context;
 		fragmentManager = getChildFragmentManager();
+	}
+
+	public Filter getFilter(){
+		return new Filter(){
+
+			@Override
+			protected FilterResults performFiltering(CharSequence charSequence) {
+				String searhString = charSequence.toString();
+
+				if(searhString.isEmpty()){
+
+					filteredarray = array;
+				}else{
+					ArrayList<Plataforma> tempFilteredList = new ArrayList<>();
+
+					for (Plataforma plataforma : array){
+
+						if(plataforma.getListaVideojuegos().contains(searhString)){
+							tempFilteredList.add(plataforma);
+						}
+					}
+					filteredarray = tempFilteredList;
+				}
+				FilterResults filterResults = new FilterResults();
+				filterResults.values = filteredarray;
+				return filterResults;
+			}
+
+			@Override
+			protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+				filteredarray = (ArrayList<Plataforma>) filterResults.values;
+				rvAdapter.notifyDataSetChanged();
+			}
+		};
 	}
 
 	@Override
