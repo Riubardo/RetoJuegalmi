@@ -3,14 +3,27 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/almi/AndroidStudioProjects/RetoJuegalmi/app/src/main/res/layout/activity_adaptador_recycler.xml" value="0.3401268115942029" />
+        <entry key="..\:/Users/almi/AndroidStudioProjects/RetoJuegalmi/app/src/main/res/layout/activity_grid_per.xml" value="0.3401268115942029" />
+        <entry key="..\:/Users/almi/AndroidStudioProjects/RetoJuegalmi/app/src/main/res/layout/activity_main.xml" value="0.3401268115942029" />
+        <entry key="..\:/Users/almi/AndroidStudioProjects/RetoJuegalmi/app/src/main/res/layout/adaptador_grid.xml" value="0.3401268115942029" />
         <entry key="..\:/Users/almi/AndroidStudioProjects/RetoJuegalmi/app/src/main/res/layout/dialog_loged.xml" value="0.33" />
         <entry key="..\:/Users/almi/AndroidStudioProjects/RetoJuegalmi/app/src/main/res/layout/dialog_login.xml" value="0.2015625" />
-        <entry key="..\:/Users/almi/AndroidStudioProjects/RetoJuegalmi/app/src/main/res/layout/fragment_home.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/almi/AndroidStudioProjects/RetoJuegalmi/app/src/main/res/layout/dialog_ver_categoria.xml" value="0.3401268115942029" />
+        <entry key="..\:/Users/almi/AndroidStudioProjects/RetoJuegalmi/app/src/main/res/layout/dialog_ver_producto.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/almi/AndroidStudioProjects/RetoJuegalmi/app/src/main/res/layout/fragment_cart.xml" value="0.3401268115942029" />
+        <entry key="..\:/Users/almi/AndroidStudioProjects/RetoJuegalmi/app/src/main/res/layout/fragment_dashboard.xml" value="0.3401268115942029" />
+        <entry key="..\:/Users/almi/AndroidStudioProjects/RetoJuegalmi/app/src/main/res/layout/fragment_home.xml" value="0.3401268115942029" />
+        <entry key="..\:/Users/almi/AndroidStudioProjects/RetoJuegalmi/app/src/main/res/layout/fragment_notifications.xml" value="0.3401268115942029" />
+        <entry key="..\:/Users/almi/AndroidStudioProjects/RetoJuegalmi/app/src/main/res/layout/fragment_support.xml" value="0.3401268115942029" />
+        <entry key="..\:/Users/almi/AndroidStudioProjects/RetoJuegalmi/app/src/main/res/layout/plataforma_dialog.xml" value="0.3401268115942029" />
+        <entry key="..\:/Users/almi/AndroidStudioProjects/RetoJuegalmi/app/src/main/res/layout/recycler_categoria.xml" value="0.3401268115942029" />
         <entry key="..\:/Users/almi/AndroidStudioProjects/RetoJuegalmi/app/src/main/res/layout/recycler_videojuego.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/almi/AndroidStudioProjects/RetoJuegalmi/app/src/main/res/layout/recycler_videojuegosimple.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/almi/AndroidStudioProjects/RetoJuegalmi/app/src/main/res/layout/select_plataforma_dialog.xml" value="0.3401268115942029" />
+        <entry key="..\:/Users/almi/AndroidStudioProjects/RetoJuegalmi/app/src/main/res/layout/texto_adapter.xml" value="0.3401268115942029" />
         <entry key="..\:/Users/almi/Desktop/ANDROID STUDIO/Septiembre-09/RetoJuegalmi/app/src/main/res/layout/activity_main.xml" value="0.24270833333333333" />
         <entry key="..\:/Users/almi/Desktop/ANDROID STUDIO/Septiembre-09/RetoJuegalmi/app/src/main/res/layout/fragment_home.xml" value="0.24270833333333333" />
-        <entry key="..\:/Users/almi/Desktop/NuevoIntento/app/src/main/res/layout/fragment_cart.xml" value="0.20520833333333333" />
         <entry key="..\:/Users/almi/Desktop/TabbedTienda/app/src/main/res/drawable/borderdialoglogin.xml" value="0.21875" />
         <entry key="..\:/Users/almi/Desktop/TabbedTienda/app/src/main/res/drawable/ic_notifications_black_24dp.xml" value="0.22135416666666666" />
         <entry key="..\:/Users/almi/Desktop/TabbedTienda/app/src/main/res/layout/activity_main.xml" value="0.29528985507246375" />

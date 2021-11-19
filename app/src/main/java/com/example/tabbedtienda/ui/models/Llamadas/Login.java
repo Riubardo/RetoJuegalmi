@@ -1,4 +1,4 @@
-package com.example.tabbedtienda.ui.models;
+package com.example.tabbedtienda.ui.models.Llamadas;
 
 public class Login {
     public String usuario, contra;

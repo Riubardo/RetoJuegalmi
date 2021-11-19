@@ -61,14 +61,14 @@
             android:padding="10px">
 
             <Button
-                android:id="@+id/btnComprar"
+                android:id="@+id/btnProductoComprar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Comprar" />
 
             <Button
-                android:id="@+id/btnAlquilar"
+                android:id="@+id/btnProductoAlquilar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
