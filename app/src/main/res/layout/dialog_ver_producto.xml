@@ -44,7 +44,7 @@
             android:layout_height="600px"
             android:adjustViewBounds="true"
             android:scaleType="center"
-            app:srcCompat="@drawable/paisaje10" />
+            app:srcCompat="@drawable/palacialmi" />
 
         <TextView
             android:id="@+id/descripcionProducto"
