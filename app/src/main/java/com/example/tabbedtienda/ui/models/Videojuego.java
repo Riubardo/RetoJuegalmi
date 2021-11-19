@@ -1,49 +1,79 @@
 package com.example.tabbedtienda.ui.models;
 
-import java.io.Serializable;
+import com.google.gson.annotations.SerializedName;
 
-public class Videojuego implements Serializable {
-	private int id;
-	private String nombre;
-	private String descripcion;
-	private int pegi;
-	private String nombreDesarrolladora;
-	private float precioVenta;
-	private float precioAlquiler;
-	private String imagen;
+public class Videojuego {
+    @SerializedName("id")
+    private int id;
+    @SerializedName("codigo")
+    private String codigo;
+    @SerializedName("idModeloVideojuego")
+    private int id_modelo_videojuego;
+    @SerializedName("idVenta")
+    private int id_venta;
+    @SerializedName("idPlataforma")
+    private int id_plataforma;
+    @SerializedName("fisico")
+    private boolean fisico;
+    @SerializedName("alquilable")
+    private boolean alquilable;
 
-	public Videojuego(int id, String nombre, String descripcion, int pegi, String nombreDesarrolladora, float precioVenta, float precioAlquiler, String imagen) {
-		this.id = id;
-		this.nombre = nombre;
-		this.descripcion = descripcion;
-		this.pegi = pegi;
-		this.nombreDesarrolladora = nombreDesarrolladora;
-		this.precioVenta = precioVenta;
-		this.precioAlquiler = precioAlquiler;
-		this.imagen = imagen;
-	}
+    public Videojuego() {
+    }
 
-	public int getId() { return id; }
-	public void setId(int id) { this.id = id; }
+    public int getId() {
+        return id;
+    }
 
-	public String getNombre() { return nombre; }
-	public void setNombre(String nombre) { this.nombre = nombre; }
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public String getDescripcion() { return descripcion; }
-	public void setDescripcion(String descripcion) { this.descripcion = descripcion; }
+    public String getCodigo() {
+        return codigo;
+    }
 
-	public int getPegi() { return pegi; }
-	public void setPegi(int pegi) { this.pegi = pegi; }
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
 
-	public String getNombreDesarrolladora() { return nombreDesarrolladora; }
-	public void setNombreDesarrolladora(String nombreDesarrolladora) { this.nombreDesarrolladora = nombreDesarrolladora; }
+    public int getId_modelo_videojuego() {
+        return id_modelo_videojuego;
+    }
 
-	public float getPrecioVenta() { return precioVenta; }
-	public void setPrecioVenta(float precioVenta) { this.precioVenta = precioVenta; }
+    public void setId_modelo_videojuego(int id_modelo_videojuego) {
+        this.id_modelo_videojuego = id_modelo_videojuego;
+    }
 
-	public float getPrecioAlquiler() { return precioAlquiler; }
-	public void setPrecioAlquiler(float precioAlquiler) { this.precioAlquiler = precioAlquiler; }
+    public int getId_venta() {
+        return id_venta;
+    }
 
-	public String getImagen() { return imagen; }
-	public void setImagen(String utlImagenGoogle) { this.imagen = utlImagenGoogle; }
+    public void setId_venta(int id_venta) {
+        this.id_venta = id_venta;
+    }
+
+    public int getId_plataforma() {
+        return id_plataforma;
+    }
+
+    public void setId_plataforma(int id_plataforma) {
+        this.id_plataforma = id_plataforma;
+    }
+
+    public boolean isFisico() {
+        return fisico;
+    }
+
+    public void setFisico(boolean fisico) {
+        this.fisico = fisico;
+    }
+
+    public boolean isAlquilable() {
+        return alquilable;
+    }
+
+    public void setAlquilable(boolean alquilable) {
+        this.alquilable = alquilable;
+    }
 }

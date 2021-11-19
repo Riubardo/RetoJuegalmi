@@ -1,10 +1,12 @@
 package com.example.tabbedtienda;
 
 import android.os.Bundle;
-import android.widget.Toast;
 
 import com.example.tabbedtienda.databinding.ActivityMainBinding;
+import com.example.tabbedtienda.ui.models.Dispositivo;
 import com.example.tabbedtienda.ui.models.Usuario;
+import com.example.tabbedtienda.ui.models.ModeloVideojuego;
+import com.example.tabbedtienda.ui.models.Videojuego;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,12 +15,15 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity{
 	public static MainActivity mainActivity;
 	private ActivityMainBinding binding;
 	private Usuario logeado = null;
+	private ArrayList<Videojuego> modeloVideojuegos = new ArrayList<Videojuego>();
+	private ArrayList<Dispositivo> dispositivos = new ArrayList<Dispositivo>();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

@@ -7,9 +7,9 @@ public class Plataforma implements Serializable{
 
 	private int id;
 	private String plataforma;
-	private ArrayList<Videojuego> juego;
+	private ArrayList<ModeloVideojuego> juego;
 
-	public Plataforma(int id, String plataforma, ArrayList<Videojuego> juego){
+	public Plataforma(int id, String plataforma, ArrayList<ModeloVideojuego> juego){
 		this.id = id;
 		this.plataforma = plataforma;
 		this.juego = juego;
@@ -21,6 +21,6 @@ public class Plataforma implements Serializable{
 	public String getPlataforma() { return plataforma; }
 	public void setPlataforma(String plataforma) { this.plataforma = plataforma; }
 
-	public ArrayList<Videojuego> getListaVideojuegos() { return juego; }
-	public void setListaVideojuegos(ArrayList<Videojuego> listaJuegos) { this.juego = listaJuegos; }
+	public ArrayList<ModeloVideojuego> getListaVideojuegos() { return juego; }
+	public void setListaVideojuegos(ArrayList<ModeloVideojuego> listaJuegos) { this.juego = listaJuegos; }
 }

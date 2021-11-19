@@ -1,7 +1,6 @@
 package com.example.tabbedtienda.ui.home;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tabbedtienda.R;
 import com.example.tabbedtienda.ui.models.Plataforma;
-import com.example.tabbedtienda.ui.models.Videojuego;
+import com.example.tabbedtienda.ui.models.ModeloVideojuego;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -94,8 +93,8 @@ public class AdaptadorPlataforma extends RecyclerView.Adapter<AdaptadorPlataform
 		//viewHolder.getTvId().setText("ID: " + listaPlataformas.get(position).getId());
 
 
-		ArrayList<Videojuego> listaVideojuegos = listaPlataformas.get(position).getListaVideojuegos();
-		rvAdapterVideojuego = new AdaptadorVideojuegoHome(fragment , listaVideojuegos);
+		ArrayList<ModeloVideojuego> listaModeloVideojuegos = listaPlataformas.get(position).getListaVideojuegos();
+		rvAdapterVideojuego = new AdaptadorVideojuegoHome(fragment , listaModeloVideojuegos);
 
 		LinearLayoutManager layoutManager = new LinearLayoutManager(viewHolder.getContext(), LinearLayoutManager.HORIZONTAL, false);
 		viewHolder.getRecyclerCategoria().setLayoutManager(layoutManager);

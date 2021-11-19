@@ -10,13 +10,13 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tabbedtienda.R;
-import com.example.tabbedtienda.ui.models.Videojuego;
+import com.example.tabbedtienda.ui.models.ModeloVideojuego;
 
 import java.util.ArrayList;
 
 public class AdaptadorVideojuego extends RecyclerView.Adapter<AdaptadorVideojuego.ViewHolder> {
 
-	private ArrayList<Videojuego> listaVideojuegos;
+	private ArrayList<ModeloVideojuego> listaModeloVideojuegos;
 
 	// -----> CLASE VIEWHOLDER
 	public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -34,8 +34,8 @@ public class AdaptadorVideojuego extends RecyclerView.Adapter<AdaptadorVideojueg
 	}
 
 	// -----> CONSTRUCTOR ADAPTADOR: PIDE ARRAYLIST DE PLATAFORMAS
-	public AdaptadorVideojuego(Context context, ArrayList<Videojuego> dataSet) {
-		listaVideojuegos = dataSet;
+	public AdaptadorVideojuego(Context context, ArrayList<ModeloVideojuego> dataSet) {
+		listaModeloVideojuegos = dataSet;
 	}
 
 	@NonNull
@@ -52,12 +52,12 @@ public class AdaptadorVideojuego extends RecyclerView.Adapter<AdaptadorVideojueg
 	@Override
 	public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
 		//viewHolder.getTvNombre().setText(listaVideojuegos.get(position).getNombreJuego() + "(" + position+1 + "/" + this.getItemCount() +")");
-		viewHolder.getTvNombre().setText(listaVideojuegos.get(position).getNombre());
+		viewHolder.getTvNombre().setText(listaModeloVideojuegos.get(position).getNombre());
 	}
 
 	@Override
 	public int getItemCount() {
-		return listaVideojuegos.size();
+		return listaModeloVideojuegos.size();
 	}
 
 }
