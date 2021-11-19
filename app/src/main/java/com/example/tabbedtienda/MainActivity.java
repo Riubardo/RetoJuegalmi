@@ -3,7 +3,7 @@ package com.example.tabbedtienda;
 import android.os.Bundle;
 
 import com.example.tabbedtienda.databinding.ActivityMainBinding;
-import com.example.tabbedtienda.ui.models.Dispositivo;
+import com.example.tabbedtienda.ui.models.PeticionMarcas;
 import com.example.tabbedtienda.ui.models.Usuario;
 import com.example.tabbedtienda.ui.models.ModeloVideojuego;
 import com.example.tabbedtienda.ui.models.Videojuego;
@@ -23,7 +23,6 @@ public class MainActivity extends AppCompatActivity{
 	private ActivityMainBinding binding;
 	private Usuario logeado = null;
 	private ArrayList<Videojuego> modeloVideojuegos = new ArrayList<Videojuego>();
-	private ArrayList<Dispositivo> dispositivos = new ArrayList<Dispositivo>();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

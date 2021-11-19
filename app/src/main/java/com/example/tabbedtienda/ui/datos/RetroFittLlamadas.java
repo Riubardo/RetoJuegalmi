@@ -2,6 +2,7 @@ package com.example.tabbedtienda.ui.datos;
 
 import com.example.tabbedtienda.ui.models.Cliente;
 import com.example.tabbedtienda.ui.models.Login;
+import com.example.tabbedtienda.ui.models.PeticionMarcas;
 import com.example.tabbedtienda.ui.models.Plataforma;
 import com.example.tabbedtienda.ui.models.Usuario;
 
@@ -21,4 +22,10 @@ public interface RetroFittLlamadas {
 
     @POST("login")
     Call<Usuario> getLogin(@Body Login login);
+
+    @GET("marcas/stock/telefonia")
+    Call<List<PeticionMarcas>> getTelefonia();
+
+    @GET("marcas/stock/consolas")
+    Call<List<PeticionMarcas>> getConsolas();
 }

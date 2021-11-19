@@ -20,6 +20,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 
 import com.example.tabbedtienda.LogedDialogFragment;
 import com.example.tabbedtienda.LoginDialogFragment;
@@ -28,6 +29,7 @@ import com.example.tabbedtienda.R;
 import com.example.tabbedtienda.databinding.FragmentHomeBinding;
 import com.example.tabbedtienda.ui.datos.ModelajeJSON;
 import com.example.tabbedtienda.ui.models.Plataforma;
+import com.google.android.material.tabs.TabLayout;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -56,16 +58,22 @@ public class HomeFragment extends Fragment {
 	private HomeViewModel homeViewModel;
 	private FragmentHomeBinding binding;
 
+	TabLayout tabLayout;
+	ViewPager viewPager;
+
 	public FragmentManager getHomeFM(){
 		return fragmentManager;
 	}
 
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
+		View view = inflater.inflate(R.layout.new_fragment_home, null);
+
+		/*
+		//----------->>>VIEWMODEL
 		homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
 
 
-		View view = inflater.inflate(R.layout.fragment_home, null);
 
 		// RecyclerView Categoria Setup
 		recyclerView = (RecyclerView) view.findViewById(R.id.recyclerHome);
@@ -76,6 +84,8 @@ public class HomeFragment extends Fragment {
 		//listaPlataformas = new ArrayList<>();
 		homeViewModel.homeFragment = this;
 		homeViewModel.devuelveLista();
+*/
+		//----------->>>BARRA SUPERIOR
 
 		buscador = (SearchView) view.findViewById(R.id.searchView) ;
 		buscador.setOnClickListener(new View.OnClickListener() {
@@ -115,6 +125,15 @@ public class HomeFragment extends Fragment {
 
 	}
 
+	@Override
+	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+		AdaptadorViewPager adaptadorTienda = new AdaptadorViewPager(getChildFragmentManager());
+		viewPager=view.findViewById(R.id.viewPager);
+		tabLayout=view.findViewById(R.id.tabLayout);
+		viewPager.setAdapter(adaptadorTienda);
+		tabLayout.setupWithViewPager(viewPager);
+
+	}
 
 	/*@Override
 	protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
