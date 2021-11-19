@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class Plataforma implements Serializable{
 	@SerializedName("id")
 	private int id;
-	@SerializedName("plataforma")
+	@SerializedName("nombre")
 	private String plataforma;
 	@SerializedName("juego")
 	private ArrayList<ModeloVideojuego> juego;

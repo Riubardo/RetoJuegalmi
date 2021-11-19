@@ -3,7 +3,6 @@ package com.example.tabbedtienda;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,9 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.tabbedtienda.ui.datos.RetroFittLlamadas;
-import com.example.tabbedtienda.ui.models.Cliente;
-import com.example.tabbedtienda.ui.models.Login;
-import com.example.tabbedtienda.ui.models.Trabajador;
+import com.example.tabbedtienda.ui.models.Llamadas.Login;
 import com.example.tabbedtienda.ui.models.Usuario;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

@@ -20,6 +20,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity{
 	public static MainActivity mainActivity;
+	private ActivityMainBinding binding;
 	private Usuario logeado = null;
 	private ArrayList<Videojuego> videojuegos = new ArrayList<Videojuego>();
 	private ArrayList<Dispositivo> dispositivos = new ArrayList<Dispositivo>();
@@ -28,7 +29,7 @@ public class MainActivity extends AppCompatActivity{
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		mainActivity = this;
-		com.example.tabbedtienda.databinding.ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
+		binding = ActivityMainBinding.inflate(getLayoutInflater());
 		setContentView(binding.getRoot());
 
 		BottomNavigationView navView = findViewById(R.id.nav_view);

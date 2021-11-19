@@ -7,19 +7,33 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.tabbedtienda.MainActivity;
 import com.example.tabbedtienda.R;
+import com.example.tabbedtienda.ui.datos.RetroFittLlamadas;
+import com.example.tabbedtienda.ui.models.Llamadas.Login;
 import com.example.tabbedtienda.ui.models.ModeloVideojuego;
+import com.example.tabbedtienda.ui.models.Plataforma;
+import com.example.tabbedtienda.ui.models.Usuario;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ProductoDialog extends DialogFragment {
 
@@ -28,13 +42,9 @@ public class ProductoDialog extends DialogFragment {
 	private TextView tvNombreProducto;
 	private ImageView ivImagenProducto;
 	private TextView tvDescripcionProducto;
-	private ArrayList<ModeloVideojuego> listaModeloVideojuegos;
+	private Spinner spPlataformas;
+	private ArrayList<Plataforma> plataformas;
 	private ModeloVideojuego modeloVideojuego;
-
-	//-----> Cosas del Recycler
-	RecyclerView recyclerViewVideojuego;
-	RecyclerView.Adapter rvAdapterVideojuego;
-	RecyclerView.LayoutManager rvLayoutMangerVideojuego;
 	Fragment fragment;
 
 	public ProductoDialog(Fragment fragment, ModeloVideojuego modeloVideojuego){
@@ -56,6 +66,35 @@ public class ProductoDialog extends DialogFragment {
 		dialog.setTitle("Ver Producto");
 		return dialog;
 	}
+	public void cargarDatos(String nomb, String contra){
+		Gson gson = new GsonBuilder()
+				.setLenient()
+				.create();
+		Retrofit retrofit = new Retrofit.Builder()
+				.baseUrl("https://arkadio.duckdns.org/ws/")
+				.addConverterFactory(GsonConverterFactory.create(gson))
+				.build();
+		RetroFittLlamadas retroFittLlamadas = retrofit.create(RetroFittLlamadas.class);
+		Login login = new Login(nomb, contra);
+		Call<Usuario> call = retroFittLlamadas.getLogin(login);
+		call.enqueue(new Callback<Usuario>() {
+			@Override
+			public void onResponse(Call<Usuario> call, Response<Usuario> response) {
+				if(response.isSuccessful()) {
+					Usuario usuario = response.body();
+					if (usuario.getCliente() != null || usuario.getTrabajador() != null)
+						MainActivity.mainActivity.setLogeado(usuario);
+				} else {
+					System.out.println(response.errorBody());
+				}
+			}
+
+			@Override
+			public void onFailure(Call<Usuario> call, Throwable t) {
+				t.printStackTrace();
+			}
+		});
+	}
 	//Crear la vista (instancias etc)
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -66,13 +105,19 @@ public class ProductoDialog extends DialogFragment {
 		tvNombreProducto = (TextView) vista.findViewById(R.id.nombreProducto);
 		ivImagenProducto = (ImageView) vista.findViewById(R.id.imagenProducto);
 		tvDescripcionProducto = (TextView) vista.findViewById(R.id.descripcionProducto);
+		((Button) vista.findViewById(R.id.btnProductoComprar)).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				SelectPlataformaDialog dialog = new SelectPlataformaDialog();
+				dialog.setIdJuego(modeloVideojuego.getId());
+				dialog.show(fragment.getChildFragmentManager(), "Select Plataforma");
+			}
+		});
 
 		//-----> DATOS VIDEOJUEGO
 		tvNombreProducto.setText(modeloVideojuego.getNombre());
 		Glide.with(fragment.getContext()).load(modeloVideojuego.getImagen()).centerCrop().into(ivImagenProducto);
 		tvDescripcionProducto.setText(modeloVideojuego.getDescripcion());
-
-
 		return vista;
 	}
 	@Override
@@ -87,10 +132,5 @@ public class ProductoDialog extends DialogFragment {
 				dismiss();
 			}
 		});
-
-
-
-
-
 	}
 }
