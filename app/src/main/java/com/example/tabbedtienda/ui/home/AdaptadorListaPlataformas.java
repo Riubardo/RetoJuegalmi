@@ -25,7 +25,6 @@ public class AdaptadorListaPlataformas extends ArrayAdapter<Plataforma> {
     private List<Plataforma> plataformas;
     private Context contexto;
 
-
     public AdaptadorListaPlataformas(@NonNull Context context, int resource, List<Plataforma> objects) {
         super(context, resource, objects);
         this.contexto = context;
