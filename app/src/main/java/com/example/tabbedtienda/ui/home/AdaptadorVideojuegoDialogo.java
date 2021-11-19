@@ -11,13 +11,13 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tabbedtienda.R;
-import com.example.tabbedtienda.ui.models.Videojuego;
+import com.example.tabbedtienda.ui.models.ModeloVideojuego;
 
 import java.util.ArrayList;
 
 public class AdaptadorVideojuegoDialogo extends RecyclerView.Adapter<AdaptadorVideojuegoDialogo.ViewHolder> {
 
-	private ArrayList<Videojuego> listaVideojuegos;
+	private ArrayList<ModeloVideojuego> listaModeloVideojuegos;
 	Fragment fragment;
 
 	// -----> CLASE VIEWHOLDER
@@ -39,8 +39,8 @@ public class AdaptadorVideojuegoDialogo extends RecyclerView.Adapter<AdaptadorVi
 	}
 
 	// -----> CONSTRUCTOR ADAPTADOR: PIDE ARRAYLIST DE PLATAFORMAS
-	public AdaptadorVideojuegoDialogo(Fragment fragmento, ArrayList<Videojuego> dataSet) {
-		listaVideojuegos = dataSet;
+	public AdaptadorVideojuegoDialogo(Fragment fragmento, ArrayList<ModeloVideojuego> dataSet) {
+		listaModeloVideojuegos = dataSet;
 		this.fragment = fragmento;
 	}
 
@@ -59,11 +59,11 @@ public class AdaptadorVideojuegoDialogo extends RecyclerView.Adapter<AdaptadorVi
 	public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
 		//viewHolder.getTvNombre().setText(listaVideojuegos.get(position).getNombreJuego() + "(" + position+1 + "/" + this.getItemCount() +")");
 
-		viewHolder.getTvNombre().setText(listaVideojuegos.get(position).getNombre());
+		viewHolder.getTvNombre().setText(listaModeloVideojuegos.get(position).getNombre());
 		//viewHolder.getTvId().setText("ID: " + listaVideojuegos.get(position).getId());
 		//Glide.with(viewHolder.getC).load(listaVideojuegos.get(position).getUrlImagenGoogle()).centerCrop().into(viewHolder.getImage());
 
-		final ProductoDialog dialog = new ProductoDialog(fragment, (Videojuego)listaVideojuegos.get(position));
+		final ProductoDialog dialog = new ProductoDialog(fragment, (ModeloVideojuego) listaModeloVideojuegos.get(position));
 		viewHolder.getTvNombre().setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -76,7 +76,7 @@ public class AdaptadorVideojuegoDialogo extends RecyclerView.Adapter<AdaptadorVi
 
 	@Override
 	public int getItemCount() {
-		return listaVideojuegos.size();
+		return listaModeloVideojuegos.size();
 	}
 
 }
