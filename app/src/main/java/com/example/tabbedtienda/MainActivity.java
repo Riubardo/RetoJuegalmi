@@ -20,16 +20,15 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity{
 	public static MainActivity mainActivity;
-	private ActivityMainBinding binding;
 	private Usuario logeado = null;
-	private ArrayList<Videojuego> modeloVideojuegos = new ArrayList<Videojuego>();
+	private ArrayList<Videojuego> videojuegos = new ArrayList<Videojuego>();
 	private ArrayList<Dispositivo> dispositivos = new ArrayList<Dispositivo>();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		mainActivity = this;
-		binding = ActivityMainBinding.inflate(getLayoutInflater());
+		com.example.tabbedtienda.databinding.ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
 		setContentView(binding.getRoot());
 
 		BottomNavigationView navView = findViewById(R.id.nav_view);
@@ -45,6 +44,22 @@ public class MainActivity extends AppCompatActivity{
 		NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
 		NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
 		NavigationUI.setupWithNavController(binding.navView, navController);
+	}
+
+	public ArrayList<Videojuego> getVideojuegos() {
+		return videojuegos;
+	}
+
+	public void setVideojuegos(ArrayList<Videojuego> videojuegos) {
+		this.videojuegos = videojuegos;
+	}
+
+	public ArrayList<Dispositivo> getDispositivos() {
+		return dispositivos;
+	}
+
+	public void setDispositivos(ArrayList<Dispositivo> dispositivos) {
+		this.dispositivos = dispositivos;
 	}
 
 	public Usuario getLogeado() {
