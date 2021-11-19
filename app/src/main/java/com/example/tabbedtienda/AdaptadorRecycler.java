@@ -58,15 +58,11 @@ public class AdaptadorRecycler extends RecyclerView.Adapter<AdaptadorRecycler.Ad
 
     public ArrayList<GaleriaFotos> llenarArray() {
         ArrayList<GaleriaFotos> arrayGaleria = new ArrayList<GaleriaFotos>();
-        arrayGaleria.add(new GaleriaFotos("https://almi.eus/wp-content/uploads/2019/11/IMG_20191125_084551.jpg"));
-        arrayGaleria.add(new GaleriaFotos("https://almi.eus/wp-content/uploads/2019/11/IMG_20191125_084551.jpg"));
-        arrayGaleria.add(new GaleriaFotos("https://almi.eus/wp-content/uploads/2019/11/IMG_20191125_084551.jpg"));
-        arrayGaleria.add(new GaleriaFotos("https://almi.eus/wp-content/uploads/2019/11/IMG_20191125_084551.jpg"));
-        arrayGaleria.add(new GaleriaFotos("https://almi.eus/wp-content/uploads/2019/11/IMG_20191125_084551.jpg"));
-        arrayGaleria.add(new GaleriaFotos("https://almi.eus/wp-content/uploads/2019/11/IMG_20191125_084551.jpg"));
-        arrayGaleria.add(new GaleriaFotos("https://almi.eus/wp-content/uploads/2019/11/IMG_20191125_084551.jpg"));
-        arrayGaleria.add(new GaleriaFotos("https://almi.eus/wp-content/uploads/2019/11/IMG_20191125_084551.jpg"));
-        arrayGaleria.add(new GaleriaFotos("https://almi.eus/wp-content/uploads/2019/11/IMG_20191125_084551.jpg"));
+        arrayGaleria.add(new GaleriaFotos("https://almi.eus/wp-content/uploads/2017/05/IMG-20170516-WA0000.jpg"));
+        arrayGaleria.add(new GaleriaFotos("https://almi.eus/wp-content/uploads/2016/09/03-Entrada-Almi-1024x576.jpg"));
+        arrayGaleria.add(new GaleriaFotos("https://static2.elcorreo.com/www/multimedia/202105/17/media/cortadas/almi3-kxcH--1459x900@El%20Correo.jpg"));
+        arrayGaleria.add(new GaleriaFotos("https://almi.eus/wp-content/uploads/2021/06/premio-piko-pala-tknika.jpg"));
+
 
         return arrayGaleria;
     }
