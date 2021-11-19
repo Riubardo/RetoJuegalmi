@@ -66,35 +66,6 @@ public class ProductoDialog extends DialogFragment {
 		dialog.setTitle("Ver Producto");
 		return dialog;
 	}
-	public void cargarDatos(String nomb, String contra){
-		Gson gson = new GsonBuilder()
-				.setLenient()
-				.create();
-		Retrofit retrofit = new Retrofit.Builder()
-				.baseUrl("https://arkadio.duckdns.org/ws/")
-				.addConverterFactory(GsonConverterFactory.create(gson))
-				.build();
-		RetroFittLlamadas retroFittLlamadas = retrofit.create(RetroFittLlamadas.class);
-		Login login = new Login(nomb, contra);
-		Call<Usuario> call = retroFittLlamadas.getLogin(login);
-		call.enqueue(new Callback<Usuario>() {
-			@Override
-			public void onResponse(Call<Usuario> call, Response<Usuario> response) {
-				if(response.isSuccessful()) {
-					Usuario usuario = response.body();
-					if (usuario.getCliente() != null || usuario.getTrabajador() != null)
-						MainActivity.mainActivity.setLogeado(usuario);
-				} else {
-					System.out.println(response.errorBody());
-				}
-			}
-
-			@Override
-			public void onFailure(Call<Usuario> call, Throwable t) {
-				t.printStackTrace();
-			}
-		});
-	}
 	//Crear la vista (instancias etc)
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -110,6 +81,16 @@ public class ProductoDialog extends DialogFragment {
 			public void onClick(View view) {
 				SelectPlataformaDialog dialog = new SelectPlataformaDialog();
 				dialog.setIdJuego(modeloVideojuego.getId());
+				dialog.setAlquilable(false);
+				dialog.show(fragment.getChildFragmentManager(), "Select Plataforma");
+			}
+		});
+		((Button) vista.findViewById(R.id.btnProductoAlquilar)).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				SelectPlataformaDialog dialog = new SelectPlataformaDialog();
+				dialog.setIdJuego(modeloVideojuego.getId());
+				dialog.setAlquilable(true);
 				dialog.show(fragment.getChildFragmentManager(), "Select Plataforma");
 			}
 		});

@@ -1,9 +1,12 @@
 package com.example.tabbedtienda.ui.datos;
 
+import com.example.tabbedtienda.ui.models.Llamadas.LlamadaVideojuego;
 import com.example.tabbedtienda.ui.models.Llamadas.Login;
 import com.example.tabbedtienda.ui.models.Llamadas.PlataformasModeloJuego;
+import com.example.tabbedtienda.ui.models.ModeloVideojuego;
 import com.example.tabbedtienda.ui.models.Plataforma;
 import com.example.tabbedtienda.ui.models.Usuario;
+import com.example.tabbedtienda.ui.models.Videojuego;
 
 import java.util.List;
 
@@ -21,4 +24,7 @@ public interface RetroFittLlamadas {
 
     @POST("plataformas/modeloJuego")
     Call<List<Plataforma>> getPlataformasModeloJuego(@Body PlataformasModeloJuego plataformasModeloJuego);
+
+    @POST("videojuego")
+    Call<List<Videojuego>> getVideojuego(@Body LlamadaVideojuego llamadaVideojuego);
 }

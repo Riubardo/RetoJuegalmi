@@ -1,6 +1,7 @@
 package com.example.tabbedtienda;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import com.example.tabbedtienda.databinding.ActivityMainBinding;
 import com.example.tabbedtienda.ui.models.Dispositivo;
@@ -53,6 +54,7 @@ public class MainActivity extends AppCompatActivity{
 
 	public void setVideojuegos(ArrayList<Videojuego> videojuegos) {
 		this.videojuegos = videojuegos;
+		Log.d("pasa", videojuegos.size() + "");
 	}
 
 	public ArrayList<Dispositivo> getDispositivos() {
