@@ -34,7 +34,6 @@ import com.example.tabbedtienda.R;
 import com.example.tabbedtienda.databinding.FragmentHomeBinding;
 import com.example.tabbedtienda.ui.datos.ModelajeJSON;
 import com.example.tabbedtienda.ui.datos.RetroFittLlamadas;
-import com.example.tabbedtienda.ui.models.Login;
 import com.example.tabbedtienda.ui.models.Plataforma;
 import com.example.tabbedtienda.ui.models.Usuario;
 import com.google.gson.Gson;

@@ -54,7 +54,6 @@ public class MainActivity extends AppCompatActivity{
 
 	public void setVideojuegos(ArrayList<Videojuego> videojuegos) {
 		this.videojuegos = videojuegos;
-		Log.d("pasa", videojuegos.size() + "");
 	}
 
 	public ArrayList<Dispositivo> getDispositivos() {
