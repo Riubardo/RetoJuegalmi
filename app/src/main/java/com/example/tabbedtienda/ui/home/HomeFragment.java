@@ -95,15 +95,6 @@ public class HomeFragment extends Fragment {
 
 		buscador = (SearchView) view.findViewById(R.id.searchView) ;
 		buscador.setOnClickListener(new View.OnClickListener() {
-		buscador = (SearchView) view.findViewById(R.id.searchView);
-
-
-		buscador.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-			@Override
-			public boolean onQueryTextSubmit(String s) {
-				return false;
-			}
-
 			@Override
 			public void onClick(View view) {
 				Intent abrir = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
@@ -112,9 +103,6 @@ public class HomeFragment extends Fragment {
 				//Para que reconozca el idioma
 				abrir.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
 				startActivityForResult(abrir, VOZ);
-			public boolean onQueryTextChange(String s) {
-				getFilter().filter(s);
-				return false;
 			}
 		});
 

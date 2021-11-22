@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-public class DispositivoR implements Serializable {
+public class Dispositivo implements Serializable {
 
     @SerializedName("id")
     private int id;
@@ -23,7 +23,7 @@ public class DispositivoR implements Serializable {
     @SerializedName("idMarca")
     private Marca marca;
 
-    public DispositivoR() {
+    public Dispositivo() {
 
     }
 
