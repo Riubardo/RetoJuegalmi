@@ -2,6 +2,7 @@ package com.example.tabbedtienda.ui.home;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,7 +50,7 @@ public class HomeFragment extends Fragment {
 	public FragmentManager fragmentManager;
 
 	private SearchView buscador;
-	ResultadoBuscada resultadoBusqueda = new ResultadoBuscada(new ArrayList<ModeloVideojuego>(), new ArrayList<ModeloDispositivo>());
+	ResultadoBuscada resultadoBusqueda = new ResultadoBuscada();
 
 
 	private LoginDialogFragment dialog = null;
@@ -81,12 +82,14 @@ public class HomeFragment extends Fragment {
 			@Override
 			public boolean onQueryTextSubmit(String s) {
 
+				buscar(s);
 
 				return false;
 			}
 
 			@Override
 			public boolean onQueryTextChange(String s) {
+
 				return false;
 			}
 		});
@@ -125,6 +128,7 @@ public class HomeFragment extends Fragment {
 
 
 	public void buscar(String s){
+
 		Gson gson = new GsonBuilder()
 				.setLenient()
 				.create();
@@ -137,13 +141,15 @@ public class HomeFragment extends Fragment {
 		call.enqueue(new Callback<ResultadoBuscada>() {
 			@Override
 			public void onResponse(Call<ResultadoBuscada> call, Response<ResultadoBuscada> response) {
-				if(response.isSuccessful()) {
+				//if(response.isSuccessful()) {
 					resultadoBusqueda = response.body();
-					dia
+//				assert resultadoBusqueda != null;
+     			Log.d("algo2", resultadoBusqueda.toString());
 
-				} else {
-					System.out.println(response.errorBody());
-				}
+				//} else {
+					//System.out.println(response.errorBody());
+					//Log.d("algo1", "mal"+response.errorBody());
+				//}
 			}
 
 			@Override

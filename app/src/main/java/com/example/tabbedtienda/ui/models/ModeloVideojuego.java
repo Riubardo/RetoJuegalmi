@@ -13,7 +13,7 @@ public class ModeloVideojuego{
 	private String descripcion;
 	@SerializedName("pegi")
 	private int pegi;
-	@SerializedName("nombreDesarrolladora")
+	@SerializedName("desarrolladora")
 	private String nombreDesarrolladora;
 	@SerializedName("precioVenta")
 	private float precioVenta;

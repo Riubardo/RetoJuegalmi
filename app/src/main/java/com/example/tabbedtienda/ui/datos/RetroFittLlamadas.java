@@ -5,6 +5,7 @@ import com.example.tabbedtienda.ui.models.Llamadas.Login;
 import com.example.tabbedtienda.ui.models.Llamadas.PlataformasModeloJuego;
 import com.example.tabbedtienda.ui.models.ModeloVideojuego;
 import com.example.tabbedtienda.ui.models.Plataforma;
+import com.example.tabbedtienda.ui.models.ResultadoBuscada;
 import com.example.tabbedtienda.ui.models.Usuario;
 import com.example.tabbedtienda.ui.models.Videojuego;
 
@@ -27,4 +28,7 @@ public interface RetroFittLlamadas {
 
     @POST("videojuego")
     Call<List<Videojuego>> getVideojuego(@Body LlamadaVideojuego llamadaVideojuego);
+
+    @POST("busqueda")
+    Call<ResultadoBuscada> getBusqueda(@Body String s);
 }

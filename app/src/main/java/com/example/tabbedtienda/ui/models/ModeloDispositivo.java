@@ -6,9 +6,9 @@ public class ModeloDispositivo {
     @SerializedName("id")
     private int id;
     @SerializedName("idTipo")
-    private int idTipo;
+    private Tipo idTipo;
     @SerializedName("idMarca")
-    private int idMarca;
+    private Marca idMarca;
     @SerializedName("nombre")
     private String nombre;
     @SerializedName("descripcion")
@@ -33,19 +33,19 @@ public class ModeloDispositivo {
         this.id = id;
     }
 
-    public int getIdTipo() {
+    public Tipo getIdTipo() {
         return idTipo;
     }
 
-    public void setIdTipo(int idTipo) {
+    public void setIdTipo(Tipo idTipo) {
         this.idTipo = idTipo;
     }
 
-    public int getIdMarca() {
+    public Marca getIdMarca() {
         return idMarca;
     }
 
-    public void setIdMarca(int idMarca) {
+    public void setIdMarca(Marca idMarca) {
         this.idMarca = idMarca;
     }
 

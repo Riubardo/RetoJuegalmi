@@ -1,14 +1,16 @@
 package com.example.tabbedtienda.ui.models;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.ArrayList;
 
 public class ResultadoBuscada {
+    @SerializedName("videojuegos")
     ArrayList<ModeloVideojuego> arrayModeloVideojuego;
+    @SerializedName("dispositivos")
     ArrayList<ModeloDispositivo> arrayModeloDispositivo;
 
-    public ResultadoBuscada(ArrayList<ModeloVideojuego> arrayModeloVideojuego, ArrayList<ModeloDispositivo> arrayModeloDispositivo) {
-        this.arrayModeloVideojuego = arrayModeloVideojuego;
-        this.arrayModeloDispositivo = arrayModeloDispositivo;
+    public ResultadoBuscada() {
     }
 
     public ArrayList<ModeloVideojuego> getArrayModeloVideojuego() {
