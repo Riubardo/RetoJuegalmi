@@ -3,87 +3,97 @@ package com.example.tabbedtienda.ui.models;
 import com.google.gson.annotations.SerializedName;
 
 public class ModeloDispositivo {
-	private int id;
-	private String nombre;
-	private String descripcion;
-	private Float precio;
-	private int garantia;
-	private String imagen;
-	private Tipo tipo;
-	private Marca marca;
+    @SerializedName("id")
+    private int id;
+    @SerializedName("idTipo")
+    private Tipo idTipo;
+    @SerializedName("idMarca")
+    private Marca idMarca;
+    @SerializedName("nombre")
+    private String nombre;
+    @SerializedName("descripcion")
+    private String descripcion;
+    @SerializedName("nombreDesarrolladora")
+    private String nombreDesarrolladora;
+    @SerializedName("precio")
+    private float precio;
+    @SerializedName("garantia")
+    private float garantia;
+    @SerializedName("imagen")
+    private String imagen;
 
-	public ModeloDispositivo(int id, String nombre, String descripcion, Float precio, int garantia, String imagen, Tipo tipo, Marca marca) {
-		this.id = id;
-		this.nombre = nombre;
-		this.descripcion = descripcion;
-		this.precio = precio;
-		this.garantia = garantia;
-		this.imagen = imagen;
-		this.tipo = tipo;
-		this.marca = marca;
-	}
+    public ModeloDispositivo() {
+    }
 
-	public int getId() {
-		return id;
-	}
+    public int getId() {
+        return id;
+    }
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public String getNombre() {
-		return nombre;
-	}
+    public Tipo getIdTipo() {
+        return idTipo;
+    }
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
+    public void setIdTipo(Tipo idTipo) {
+        this.idTipo = idTipo;
+    }
 
-	public String getDescripcion() {
-		return descripcion;
-	}
+    public Marca getIdMarca() {
+        return idMarca;
+    }
 
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
+    public void setIdMarca(Marca idMarca) {
+        this.idMarca = idMarca;
+    }
 
-	public Float getPrecio() {
-		return precio;
-	}
+    public String getNombre() {
+        return nombre;
+    }
 
-	public void setPrecio(Float precio) {
-		this.precio = precio;
-	}
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 
-	public int getGarantia() {
-		return garantia;
-	}
+    public String getDescripcion() {
+        return descripcion;
+    }
 
-	public void setGarantia(int garantia) {
-		this.garantia = garantia;
-	}
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
 
-	public String getImagen() {
-		return imagen;
-	}
+    public String getNombreDesarrolladora() {
+        return nombreDesarrolladora;
+    }
 
-	public void setImagen(String urlImagen) {
-		this.imagen = urlImagen;
-	}
+    public void setNombreDesarrolladora(String nombreDesarrolladora) {
+        this.nombreDesarrolladora = nombreDesarrolladora;
+    }
 
-	public Tipo getTipo() {
-		return tipo;
-	}
+    public float getPrecio() {
+        return precio;
+    }
 
-	public void setTipo(Tipo tipo) {
-		this.tipo = tipo;
-	}
+    public void setPrecio(float precio) {
+        this.precio = precio;
+    }
 
-	public Marca getMarca() {
-		return marca;
-	}
+    public float getGarantia() {
+        return garantia;
+    }
 
-	public void setMarca(Marca marca) {
-		this.marca = marca;
-	}
+    public void setGarantia(float garantia) {
+        this.garantia = garantia;
+    }
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
 }

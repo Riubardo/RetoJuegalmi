@@ -1,19 +1,28 @@
 package com.example.tabbedtienda.ui.models;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 
-public class ModeloVideojuego implements Serializable {
+public class ModeloVideojuego{
+	@SerializedName("id")
 	private int id;
+	@SerializedName("nombre")
 	private String nombre;
+	@SerializedName("descripcion")
 	private String descripcion;
+	@SerializedName("pegi")
 	private int pegi;
+	@SerializedName("nombreDesarrolladora")
 	private String nombreDesarrolladora;
+	@SerializedName("precioVenta")
 	private float precioVenta;
+	@SerializedName("precioAlquiler")
 	private float precioAlquiler;
+	@SerializedName("imagen")
 	private String imagen;
 
-	public ModeloVideojuego(int id, String nombre, String descripcion, int pegi, String nombreDesarrolladora, float precioVenta, float precioAlquiler, String imagen) {
-		this.id = id;
+	public ModeloVideojuego(String nombre, String descripcion, int pegi, String nombreDesarrolladora, float precioVenta, float precioAlquiler, String imagen) {
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.pegi = pegi;

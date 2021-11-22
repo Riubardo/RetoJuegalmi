@@ -3,28 +3,23 @@
 
     <item
         android:id="@+id/navigation_home"
-        android:icon="@drawable/ic_home_black_24dp"
-        android:title="@string/title_home" />
+        android:icon="@drawable/tienda"
+        android:title="Tienda" />
 
     <item
         android:id="@+id/navigation_dashboard"
-        android:icon="@android:drawable/ic_dialog_map"
-        android:title="@string/title_dashboard" />
+        android:icon="@drawable/gps"
+        android:title="Ubicación" />
 
     <item
         android:id="@+id/navigation_notifications"
-        android:icon="@drawable/ic_notifications_black_24dp"
-        android:title="@string/title_notifications" />
-
-    <item
-        android:id="@+id/navigation_support"
-        android:icon="@android:drawable/stat_sys_headset"
-        android:title="@string/title_support" />
+        android:icon="@drawable/galeria"
+        android:title="Galeria" />
 
     <item
         android:id="@+id/navigation_cart"
-        android:icon="@android:drawable/ic_menu_delete"
-        android:title="@string/title_cart" />
+        android:icon="@drawable/evolucion"
+        android:title="Hisrotia" />
 
 
 </menu>

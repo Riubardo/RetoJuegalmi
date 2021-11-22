@@ -7,16 +7,4 @@
     <string name="title_cart">Cart</string>
     <string name="historia_extenso">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</string>
 
-    <string-array name="paisajes">
-        <item>@drawable/paisaje1</item>
-        <item>@drawable/paisaje2</item>
-        <item>@drawable/paisaje3</item>
-        <item>@drawable/paisaje4</item>
-        <item>@drawable/paisaje5</item>
-        <item>@drawable/paisaje6</item>
-        <item>@drawable/paisaje7</item>
-        <item>@drawable/paisaje8</item>
-        <item>@drawable/paisaje9</item>
-        <item>@drawable/paisaje10</item>
-    </string-array>
 </resources>

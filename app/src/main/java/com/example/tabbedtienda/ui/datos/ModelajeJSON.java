@@ -32,7 +32,6 @@ public class ModelajeJSON {
 					for (int j = 0; j < miJsonVideojuegos.length(); j++){
 						JSONObject miJsonVideojuego = miJsonVideojuegos.getJSONObject(j);
 						miListaModeloVideojuegos.add(new ModeloVideojuego(
-								miJsonVideojuego.getInt("id"),
 								miJsonVideojuego.getString("nombre"),
 								miJsonVideojuego.getString("descripcion"),
 								miJsonVideojuego.getInt("pegi"),
@@ -44,7 +43,6 @@ public class ModelajeJSON {
 					}
 
 				Plataforma miPlataforma = new Plataforma(
-						miJsonPlataforma.getInt("id"),
 						miJsonPlataforma.getString("plataforma"),
 						miListaModeloVideojuegos
 				);

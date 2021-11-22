@@ -27,8 +27,7 @@ public class Cliente {
     @SerializedName("longitud")
     private double longitud;
 
-    public Cliente(int id, String nombre, String apellido1,String apellido2,int telefono,String email,String contrasena,String imagen,double latitud,double longitud){
-        this.id = id;
+    public Cliente( String nombre, String apellido1,String apellido2,int telefono,String email,String contrasena,String imagen,double latitud,double longitud){
         this.nombre=nombre;
         this.apellido1=apellido1;
         this.apellido2=apellido2;

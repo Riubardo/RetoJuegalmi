@@ -1,4 +1,4 @@
-package com.example.tabbedtienda.ui.models;
+package com.example.tabbedtienda.ui.models.Llamadas;
 
 public class Login {
     public String usuario, contra;
@@ -6,6 +6,9 @@ public class Login {
     public Login(String usuario, String contra) {
         this.usuario = usuario;
         this.contra = contra;
+    }
+
+    public Login() {
     }
 
     public String getUsuario() {
