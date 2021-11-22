@@ -1,11 +1,13 @@
 package com.example.tabbedtienda.ui.datos;
 
+import com.example.tabbedtienda.ui.models.Dispositivo;
+import com.example.tabbedtienda.ui.models.Llamadas.LlamadaDispositivo;
 import com.example.tabbedtienda.ui.models.Llamadas.LlamadaVideojuego;
 import com.example.tabbedtienda.ui.models.Llamadas.Login;
 import com.example.tabbedtienda.ui.models.Llamadas.PlataformasModeloJuego;
 import com.example.tabbedtienda.ui.models.ModeloVideojuego;
+import com.example.tabbedtienda.ui.models.PeticionMarcas;
 import com.example.tabbedtienda.ui.models.Plataforma;
-import com.example.tabbedtienda.ui.models.ResultadoBuscada;
 import com.example.tabbedtienda.ui.models.Usuario;
 import com.example.tabbedtienda.ui.models.Videojuego;
 
@@ -29,6 +31,12 @@ public interface RetroFittLlamadas {
     @POST("videojuego")
     Call<List<Videojuego>> getVideojuego(@Body LlamadaVideojuego llamadaVideojuego);
 
-    @POST("busqueda")
-    Call<ResultadoBuscada> getBusqueda(@Body String s);
+    @POST("dispositivo")
+    Call<List<Dispositivo>> getDispositivo(@Body LlamadaDispositivo llamadaDispositivo);
+
+    @GET("marcas/stock/telefonia")
+    Call<List<PeticionMarcas>> getTelefonia();
+
+    @GET("marcas/stock/consolas")
+    Call<List<PeticionMarcas>> getConsolas();
 }

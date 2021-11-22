@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.tabbedtienda.MainActivity;
@@ -45,6 +46,11 @@ public class ProductoDialog extends DialogFragment {
 	private Spinner spPlataformas;
 	private ArrayList<Plataforma> plataformas;
 	private ModeloVideojuego modeloVideojuego;
+
+	//-----> Cosas del Recycler
+	RecyclerView recyclerViewVideojuego;
+	RecyclerView.Adapter rvAdapterVideojuego;
+	RecyclerView.LayoutManager rvLayoutMangerVideojuego;
 	Fragment fragment;
 
 	public ProductoDialog(Fragment fragment, ModeloVideojuego modeloVideojuego){
