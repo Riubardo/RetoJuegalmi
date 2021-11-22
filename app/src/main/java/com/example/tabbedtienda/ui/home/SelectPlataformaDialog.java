@@ -139,7 +139,7 @@ public class SelectPlataformaDialog extends DialogFragment {
                         .baseUrl("https://arkadio.duckdns.org/ws/")
                         .addConverterFactory(GsonConverterFactory.create(gson))
                         .build();
-                SimpleDateFormat fmt = new SimpleDateFormat("dd-MM-yyyy");
+                SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy");
                 String fecha = fmt.format(Calendar.getInstance().getTime());
                 LlamadaVideojuego llamadaVideojuego = new LlamadaVideojuego(idJuego, plataformas.get(spPlataformas.getSelectedItemPosition()).getId(),alquilable, fecha);
                 RetroFittLlamadas retroFittLlamadas = retrofit.create(RetroFittLlamadas.class);
@@ -147,11 +147,16 @@ public class SelectPlataformaDialog extends DialogFragment {
                 call.enqueue(new Callback<List<Videojuego>>() {
                     @Override
                     public void onResponse(Call<List<Videojuego>> call, Response<List<Videojuego>> response) {
-                        //RECIBE 0 DE TAMAÑO
-                        Log.d("pasa", response.body().size() + "");
                         ArrayList<Videojuego> videojuegos = MainActivity.mainActivity.getVideojuegos();
                         for (Videojuego videojuego: response.body()) {
-                            if (!videojuegos.contains(videojuego)){
+                            boolean esta = false;
+                            for (Videojuego v: videojuegos)
+                                if (v.getId() == videojuego.getId()){
+                                    esta = true;
+                                    break;
+                                }
+                            if (!esta){
+                                Log.d("pasa", videojuego.getId() + "");
                                 videojuegos.add(videojuego);
                                 break;
                             }

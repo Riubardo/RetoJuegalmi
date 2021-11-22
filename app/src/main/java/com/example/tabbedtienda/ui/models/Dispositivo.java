@@ -5,14 +5,23 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 
 public class Dispositivo implements Serializable {
+
     @SerializedName("id")
     private int id;
-    @SerializedName("codigo")
-    private String codigo;
-    @SerializedName("idModeloVideojuego")
-    private int id_modelo_dispositivo;
-    @SerializedName("idVenta")
-    private int id_venta;
+    @SerializedName("nombre")
+    private String nombre;
+    @SerializedName("descripcion")
+    private String descripcion;
+    @SerializedName("precio")
+    private Float precio;
+    @SerializedName("garantia")
+    private int garantia;
+    @SerializedName("imagen")
+    private String urlImagen;
+    @SerializedName("idTipo")
+    private Tipo tipo;
+    @SerializedName("idMarca")
+    private Marca marca;
 
     public Dispositivo() {
 
@@ -26,27 +35,59 @@ public class Dispositivo implements Serializable {
         this.id = id;
     }
 
-    public String getCodigo() {
-        return codigo;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public int getId_modelo_dispositivo() {
-        return id_modelo_dispositivo;
+    public String getDescripcion() {
+        return descripcion;
     }
 
-    public void setId_modelo_dispositivo(int id_modelo_dispositivo) {
-        this.id_modelo_dispositivo = id_modelo_dispositivo;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
-    public int getId_venta() {
-        return id_venta;
+    public Float getPrecio() {
+        return precio;
     }
 
-    public void setId_venta(int id_venta) {
-        this.id_venta = id_venta;
+    public void setPrecio(Float precio) {
+        this.precio = precio;
+    }
+
+    public int getGarantia() {
+        return garantia;
+    }
+
+    public void setGarantia(int garantia) {
+        this.garantia = garantia;
+    }
+
+    public String getUrlImagen() {
+        return urlImagen;
+    }
+
+    public void setUrlImagen(String urlImagen) {
+        this.urlImagen = urlImagen;
+    }
+
+    public Tipo getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(Tipo tipo) {
+        this.tipo = tipo;
+    }
+
+    public Marca getMarca() {
+        return marca;
+    }
+
+    public void setMarca(Marca marca) {
+        this.marca = marca;
     }
 }

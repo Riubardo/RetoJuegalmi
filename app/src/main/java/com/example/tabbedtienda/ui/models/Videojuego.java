@@ -8,11 +8,11 @@ public class Videojuego {
     @SerializedName("codigo")
     private String codigo;
     @SerializedName("idModeloVideojuego")
-    private int id_modelo_videojuego;
+    private ModeloVideojuego id_modelo_videojuego;
     @SerializedName("idVenta")
-    private int id_venta;
+    private Venta id_venta;
     @SerializedName("idPlataforma")
-    private int id_plataforma;
+    private Plataforma id_plataforma;
     @SerializedName("fisico")
     private boolean fisico;
     @SerializedName("alquilable")
@@ -37,27 +37,27 @@ public class Videojuego {
         this.codigo = codigo;
     }
 
-    public int getId_modelo_videojuego() {
+    public ModeloVideojuego getId_modelo_videojuego() {
         return id_modelo_videojuego;
     }
 
-    public void setId_modelo_videojuego(int id_modelo_videojuego) {
+    public void setId_modelo_videojuego(ModeloVideojuego id_modelo_videojuego) {
         this.id_modelo_videojuego = id_modelo_videojuego;
     }
 
-    public int getId_venta() {
+    public Venta getId_venta() {
         return id_venta;
     }
 
-    public void setId_venta(int id_venta) {
+    public void setId_venta(Venta id_venta) {
         this.id_venta = id_venta;
     }
 
-    public int getId_plataforma() {
+    public Plataforma getId_plataforma() {
         return id_plataforma;
     }
 
-    public void setId_plataforma(int id_plataforma) {
+    public void setId_plataforma(Plataforma id_plataforma) {
         this.id_plataforma = id_plataforma;
     }
 
