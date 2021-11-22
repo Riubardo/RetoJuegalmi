@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Filter;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.SearchView;
 
@@ -33,6 +34,8 @@ import com.example.tabbedtienda.MainActivity;
 import com.example.tabbedtienda.R;
 import com.example.tabbedtienda.databinding.FragmentHomeBinding;
 import com.example.tabbedtienda.ui.datos.ModelajeJSON;
+import com.example.tabbedtienda.databinding.FragmentHomeBinding;
+import com.example.tabbedtienda.ui.datos.ModelajeJSON;
 import com.example.tabbedtienda.ui.datos.RetroFittLlamadas;
 import com.example.tabbedtienda.ui.models.Plataforma;
 import com.example.tabbedtienda.ui.models.Usuario;
@@ -44,11 +47,7 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
+
 
 
 public class HomeFragment extends Fragment {
@@ -66,10 +65,12 @@ public class HomeFragment extends Fragment {
 	ArrayList<Plataforma> array = new ArrayList<>();
 	ArrayList<Plataforma> filteredarray = new ArrayList<>();
 
+	public static final int VOZ = 1;
+	private EditText etTexto;
 
 	private LoginDialogFragment dialog = null;
 	private HomeViewModel homeViewModel;
-
+	private FragmentHomeBinding binding;
 
 	public FragmentManager getHomeFM(){
 		return fragmentManager;
@@ -78,6 +79,7 @@ public class HomeFragment extends Fragment {
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
 		homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
+
 
 		View view = inflater.inflate(R.layout.fragment_home, null);
 
@@ -91,6 +93,8 @@ public class HomeFragment extends Fragment {
 		homeViewModel.homeFragment = this;
 		homeViewModel.devuelveLista();
 
+		buscador = (SearchView) view.findViewById(R.id.searchView) ;
+		buscador.setOnClickListener(new View.OnClickListener() {
 		buscador = (SearchView) view.findViewById(R.id.searchView);
 
 
@@ -101,11 +105,20 @@ public class HomeFragment extends Fragment {
 			}
 
 			@Override
+			public void onClick(View view) {
+				Intent abrir = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+				abrir.putExtra(RecognizerIntent.EXTRA_PROMPT, "Ahora puedes hablar...");
+
+				//Para que reconozca el idioma
+				abrir.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+				startActivityForResult(abrir, VOZ);
 			public boolean onQueryTextChange(String s) {
 				getFilter().filter(s);
 				return false;
 			}
 		});
+
+
 
 		userButton = (ImageButton) view.findViewById(R.id.userButton);
 		userButton.setOnClickListener(new View.OnClickListener() {
@@ -123,9 +136,44 @@ public class HomeFragment extends Fragment {
 		});
 
 
+
+		//loadPlataformas(); <- vacio, mas adelante cargar datos acá
+
 		return view;
 
 	}
+
+
+	/*@Override
+	protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+
+		ArrayList<String> arrayResultado;
+		if (requestCode == VOZ){
+			if (resultCode == RESULT_OK){
+				if (data != null){
+					arrayResultado = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+					etTexto.setText(arrayResultado.get(0));
+				}
+			}
+		}
+	}*/
+
+	//Para buscar las palabras en google
+	private void realizarAcciones(String s){
+		try {
+			String palabraBuscar = URLEncoder.encode(s, "UTF-8");
+
+			//uri es una direccion de internet
+			Uri uri = Uri.parse("https://www.google.com/search?q=" + palabraBuscar);
+
+			Intent abrir = new Intent(Intent.ACTION_VIEW, uri);
+			startActivity(abrir);
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+	}
+
 
 	public void setAdapter(){
 		rvAdapter = new AdaptadorPlataforma(this, listaPlataformas);
@@ -175,6 +223,7 @@ public class HomeFragment extends Fragment {
 	@Override
 	public void onDestroyView() {
 		super.onDestroyView();
+		binding = null;
 	}
 
 }
