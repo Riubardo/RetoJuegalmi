@@ -19,17 +19,17 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/btnCarritoCancelar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Button" />
+            android:text="Cancelar" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/btnCarritoAceptar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Button" />
+            android:text="Comprar" />
     </LinearLayout>
 </LinearLayout>

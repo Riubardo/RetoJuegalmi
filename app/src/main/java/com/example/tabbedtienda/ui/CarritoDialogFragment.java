@@ -88,6 +88,8 @@ public class CarritoDialogFragment extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         View vista = (View)inflater.inflate(R.layout.dialog_carrito, container,false);
+        botonCancelar = vista.findViewById(R.id.btnCarritoCancelar);
+        botonVerificar = vista.findViewById(R.id.btnCarritoAceptar);
         return vista;
     }
     @Override
