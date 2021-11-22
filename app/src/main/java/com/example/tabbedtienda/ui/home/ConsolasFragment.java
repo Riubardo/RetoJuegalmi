@@ -34,10 +34,10 @@ public class ConsolasFragment extends Fragment {
 		consolasViewModel = new ViewModelProvider(this).get(ConsolasViewModel.class);
 
 
-		View view = inflater.inflate(R.layout.new_fragment_dispositivo, null);
+		View view = inflater.inflate(R.layout.new_fragment_videojuego, null);
 
 		// RecyclerView Categoria Setup
-		recyclerView = (RecyclerView) view.findViewById(R.id.recyclerMarcas);
+		recyclerView = (RecyclerView) view.findViewById(R.id.recyclerHome);
 		rvLayoutManger = new LinearLayoutManager(getActivity());
 		recyclerView.setLayoutManager(rvLayoutManger);
 

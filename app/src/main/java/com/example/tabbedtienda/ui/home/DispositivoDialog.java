@@ -86,7 +86,8 @@ public class DispositivoDialog extends DialogFragment {
 		ivImagenDispositivo = (ImageView) vista.findViewById(R.id.imagenProducto);
 		tvDescripcionDispositivo = (TextView) vista.findViewById(R.id.descripcionProducto);
 		Button btnAlquilar = vista.findViewById(R.id.btnProductoAlquilar);
-		btnAlquilar.setWidth(0);
+		ViewGroup layout = (ViewGroup) btnAlquilar.getParent();
+		layout.removeView(btnAlquilar);
 		((Button) vista.findViewById(R.id.btnProductoComprar)).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {

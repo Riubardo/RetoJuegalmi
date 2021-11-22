@@ -39,10 +39,10 @@ public class AdaptadorPlataforma extends RecyclerView.Adapter<AdaptadorPlataform
 			super(view);
 
 			// Define click listener for the ViewHolder's View -> ???
-			nombrePlataforma = (TextView) view.findViewById(R.id.nombrePlataforma);
+			nombrePlataforma = (TextView) view.findViewById(R.id.nombreMarca);
 			//idPlataforma = (TextView) view.findViewById(R.id.idPlataforma);
 			//cantidadPlataforma = (TextView) view.findViewById(R.id.cantidadPlataforma);
-			rvCategoria =(RecyclerView) view.findViewById(R.id.rvCategoria);
+			rvCategoria =(RecyclerView) view.findViewById(R.id.rvDispositivos);
 			this.context = context;
 		}
 
@@ -64,11 +64,11 @@ public class AdaptadorPlataforma extends RecyclerView.Adapter<AdaptadorPlataform
 	public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
 		// Create a new view, which defines the UI of the list item
 		View view = LayoutInflater.from(viewGroup.getContext())
-				.inflate(R.layout.recycler_categoria, viewGroup, false);
+				.inflate(R.layout.recycler_marca, viewGroup, false);
 
 
 		// RecyclerView Categoria Setup
-		recyclerViewVideojuego = (RecyclerView)view.findViewById(R.id.rvCategoria);
+		recyclerViewVideojuego = (RecyclerView)view.findViewById(R.id.rvDispositivos);
 		rvLayoutMangerVideojuego = new LinearLayoutManager(view.getContext());
 		recyclerViewVideojuego.setLayoutManager(rvLayoutMangerVideojuego);
 

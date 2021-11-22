@@ -37,10 +37,10 @@ public class DispositivosFragment extends Fragment {
 		dispositivosViewModel = new ViewModelProvider(this).get(DispositivosViewModel.class);
 
 
-		View view = inflater.inflate(R.layout.new_fragment_dispositivo, null);
+		View view = inflater.inflate(R.layout.new_fragment_videojuego, null);
 
 		// RecyclerView Categoria Setup
-		recyclerView = (RecyclerView) view.findViewById(R.id.recyclerMarcas);
+		recyclerView = (RecyclerView) view.findViewById(R.id.recyclerHome);
 		rvLayoutManger = new LinearLayoutManager(getActivity());
 		recyclerView.setLayoutManager(rvLayoutManger);
 
