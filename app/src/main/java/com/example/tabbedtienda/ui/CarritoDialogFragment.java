@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -20,6 +21,7 @@ import com.example.tabbedtienda.R;
 import com.example.tabbedtienda.ui.datos.RetroFittLlamadas;
 import com.example.tabbedtienda.ui.home.AdaptadorListaDirecciones;
 import com.example.tabbedtienda.ui.models.Direccion;
+import com.example.tabbedtienda.ui.models.Llamadas.LlamadaDireccion;
 import com.example.tabbedtienda.ui.models.Llamadas.LlamadaVenta;
 import com.example.tabbedtienda.ui.models.Llamadas.Respuesta;
 import com.example.tabbedtienda.ui.models.Usuario;
@@ -43,6 +45,7 @@ public class CarritoDialogFragment extends DialogFragment {
     private Spinner spDirecciones = null;
     private Context context;
     private List<Direccion> direcciones  = new ArrayList<>();
+    private int dirid;
     private AdaptadorListaDirecciones adaptador;
 
     public CarritoDialogFragment()
@@ -79,17 +82,16 @@ public class CarritoDialogFragment extends DialogFragment {
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
         RetroFittLlamadas retroFittLlamadas = retrofit.create(RetroFittLlamadas.class);
-        Call<List<Direccion>> call = retroFittLlamadas.getDirecciones(MainActivity.mainActivity.getLogeado().getCliente());
+        LlamadaDireccion llamadaDireccion = new LlamadaDireccion(MainActivity.mainActivity.getLogeado().getCliente().getId());
+        Call<List<Direccion>> call = retroFittLlamadas.getDirecciones(llamadaDireccion);
         call.enqueue(new Callback<List<Direccion>>() {
             @Override
             public void onResponse(Call<List<Direccion>> call, Response<List<Direccion>> response) {
-                Log.d("pasa", "aqui");
-                direcciones = response.body();
+                 direcciones = response.body();
                 adaptador.setDirecciones(direcciones);
             }
             @Override
             public void onFailure(Call<List<Direccion>> call, Throwable t) {
-                Log.d("pasa", "error");
                 t.printStackTrace();
             }
         });
@@ -109,13 +111,25 @@ public class CarritoDialogFragment extends DialogFragment {
         spDirecciones.setAdapter(adaptador);
         botonCancelar = vista.findViewById(R.id.btnCarritoCancelar);
         botonVerificar = vista.findViewById(R.id.btnCarritoAceptar);
+        if (MainActivity.mainActivity.getVideojuegos().size() <=0 && MainActivity.mainActivity.getDispositivos().size() <=0)
+            botonVerificar.setEnabled(false);
         CargarContenido();
         return vista;
     }
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState)
     {
+        spDirecciones.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                dirid = direcciones.get(i).getId();
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                dirid = direcciones.get(0).getId();
+            }
+        });
         //-----> CANCELAR
         botonCancelar.setOnClickListener(new View.OnClickListener()
         {
@@ -146,7 +160,7 @@ public class CarritoDialogFragment extends DialogFragment {
                 String fecha = fmt.format(c.getTime());
                 c.add(Calendar.DATE, 3);
                 String fechafin = fmt.format(c.getTime());
-                LlamadaVenta llamadaVenta = new LlamadaVenta(logeado.getCliente().getId(), 1, fecha, fechafin, MainActivity.mainActivity.getVideojuegos(), MainActivity.mainActivity.getDispositivos());
+                LlamadaVenta llamadaVenta = new LlamadaVenta(logeado.getCliente().getId(), dirid, fecha, fechafin, MainActivity.mainActivity.getVideojuegos(), MainActivity.mainActivity.getDispositivos());
                 Call<Respuesta> call = retroFittLlamadas.setVenta(llamadaVenta);
                 call.enqueue(new Callback<Respuesta>() {
                     @Override

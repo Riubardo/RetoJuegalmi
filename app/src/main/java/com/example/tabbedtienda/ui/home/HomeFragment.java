@@ -85,25 +85,6 @@ public class HomeFragment extends Fragment {
 
 		View view = inflater.inflate(R.layout.new_fragment_home, null);
 
-		/*
-		//----------->>>VIEWMODEL
-		homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
-
-
-		View view = inflater.inflate(R.layout.fragment_home, null);
-
-		// RecyclerView Categoria Setup
-		recyclerView = (RecyclerView) view.findViewById(R.id.recyclerHome);
-		rvLayoutManger = new LinearLayoutManager(getActivity());
-		recyclerView.setLayoutManager(rvLayoutManger);
-
-
-		//listaPlataformas = new ArrayList<>();
-		homeViewModel.homeFragment = this;
-		homeViewModel.devuelveLista();
-*/
-		//----------->>>BARRA SUPERIOR
-
 		buscador = (SearchView) view.findViewById(R.id.searchView) ;
 		buscador.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 			@Override
@@ -149,10 +130,6 @@ public class HomeFragment extends Fragment {
 			}
 		});
 
-
-
-		//loadPlataformas(); <- vacio, mas adelante cargar datos acá
-
 		return view;
 
 	}
@@ -162,7 +139,7 @@ public class HomeFragment extends Fragment {
 		@Override
 		public void onResponse(Call<ResultadoBuscada> call, Response<ResultadoBuscada> response) {
 			resultadoBuscada = response.body();
-			Log.d("algo", resultadoBuscada.getArrayModeloVideojuego().get(0).getDescripcion());
+			//Log.d("algo", resultadoBuscada.getArrayModeloVideojuego().get(0).getDescripcion());
 		}
 
 		@Override

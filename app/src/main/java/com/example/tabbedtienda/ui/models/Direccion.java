@@ -13,8 +13,8 @@ public class Direccion {
     private String piso;
     @SerializedName("codigopostal")
     private int codigopostal;
-    @SerializedName("idCiudad")
-    private Ciudad id_ciudad;
+    @SerializedName("id_ciudad")
+    private int id_ciudad;
 
     public Direccion() {
     }
@@ -59,11 +59,11 @@ public class Direccion {
         this.codigopostal = codigopostal;
     }
 
-    public Ciudad getId_ciudad() {
+    public int getId_ciudad() {
         return id_ciudad;
     }
 
-    public void setId_ciudad(Ciudad id_ciudad) {
+    public void setId_ciudad(int id_ciudad) {
         this.id_ciudad = id_ciudad;
     }
 }
