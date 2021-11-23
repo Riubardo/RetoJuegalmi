@@ -8,6 +8,7 @@ import com.example.tabbedtienda.ui.models.Llamadas.PlataformasModeloJuego;
 import com.example.tabbedtienda.ui.models.ModeloVideojuego;
 import com.example.tabbedtienda.ui.models.PeticionMarcas;
 import com.example.tabbedtienda.ui.models.Plataforma;
+import com.example.tabbedtienda.ui.models.ResultadoBuscada;
 import com.example.tabbedtienda.ui.models.Usuario;
 import com.example.tabbedtienda.ui.models.Videojuego;
 
@@ -39,4 +40,7 @@ public interface RetroFittLlamadas {
 
     @GET("marcas/stock/consolas")
     Call<List<PeticionMarcas>> getConsolas();
+
+    @POST("busqueda")
+    Call<ResultadoBuscada> getBuscador(@Body String s);
 }

@@ -4,6 +4,8 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 
+import retrofit2.Callback;
+
 public class ResultadoBuscada {
     @SerializedName("videojuegos")
     ArrayList<ModeloVideojuego> arrayModeloVideojuego;
@@ -28,4 +30,6 @@ public class ResultadoBuscada {
     public void setArrayModeloDispositivo(ArrayList<ModeloDispositivo> arrayModeloDispositivo) {
         this.arrayModeloDispositivo = arrayModeloDispositivo;
     }
+
+
 }

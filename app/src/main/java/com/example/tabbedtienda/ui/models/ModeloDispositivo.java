@@ -5,16 +5,14 @@ import com.google.gson.annotations.SerializedName;
 public class ModeloDispositivo {
     @SerializedName("id")
     private int id;
-    @SerializedName("idTipo")
+    @SerializedName("id_tipo")
     private Tipo idTipo;
-    @SerializedName("idMarca")
+    @SerializedName("id_marca")
     private Marca idMarca;
     @SerializedName("nombre")
     private String nombre;
     @SerializedName("descripcion")
     private String descripcion;
-    @SerializedName("nombreDesarrolladora")
-    private String nombreDesarrolladora;
     @SerializedName("precio")
     private float precio;
     @SerializedName("garantia")
@@ -63,14 +61,6 @@ public class ModeloDispositivo {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
-    }
-
-    public String getNombreDesarrolladora() {
-        return nombreDesarrolladora;
-    }
-
-    public void setNombreDesarrolladora(String nombreDesarrolladora) {
-        this.nombreDesarrolladora = nombreDesarrolladora;
     }
 
     public float getPrecio() {

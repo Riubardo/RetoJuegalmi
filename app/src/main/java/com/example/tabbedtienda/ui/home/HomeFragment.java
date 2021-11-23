@@ -16,6 +16,7 @@ import android.widget.Filter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -35,15 +36,23 @@ import com.example.tabbedtienda.ui.datos.ModelajeJSON;
 import com.example.tabbedtienda.databinding.FragmentHomeBinding;
 import com.example.tabbedtienda.ui.datos.ModelajeJSON;
 import com.example.tabbedtienda.ui.datos.RetroFittLlamadas;
+import com.example.tabbedtienda.ui.models.PeticionMarcas;
 import com.example.tabbedtienda.ui.models.Plataforma;
+import com.example.tabbedtienda.ui.models.ResultadoBuscada;
 import com.google.android.material.tabs.TabLayout;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
-
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class HomeFragment extends Fragment {
@@ -58,11 +67,8 @@ public class HomeFragment extends Fragment {
 	public FragmentManager fragmentManager;
 
 	private SearchView buscador;
-	ArrayList<Plataforma> array = new ArrayList<>();
-	ArrayList<Plataforma> filteredarray = new ArrayList<>();
+	ResultadoBuscada resultadoBuscada = new ResultadoBuscada();
 
-	public static final int VOZ = 1;
-	private EditText etTexto;
 
 	private LoginDialogFragment dialog = null;
 	private HomeViewModel homeViewModel;
@@ -99,15 +105,30 @@ public class HomeFragment extends Fragment {
 		//----------->>>BARRA SUPERIOR
 
 		buscador = (SearchView) view.findViewById(R.id.searchView) ;
-		buscador.setOnClickListener(new View.OnClickListener() {
+		buscador.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 			@Override
-			public void onClick(View view) {
-				Intent abrir = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-				abrir.putExtra(RecognizerIntent.EXTRA_PROMPT, "Ahora puedes hablar...");
+			public boolean onQueryTextSubmit(String s) {
+				buscar(s);
+				return false;
+			}
 
-				//Para que reconozca el idioma
-				abrir.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-				startActivityForResult(abrir, VOZ);
+			private void buscar(String s) {
+				Gson gson = new GsonBuilder()
+						.setLenient()
+						.create();
+				Retrofit retrofit = new Retrofit.Builder()
+						.baseUrl("https://arkadio.duckdns.org/ws/")
+						.addConverterFactory(GsonConverterFactory.create(gson))
+						.build();
+				RetroFittLlamadas retroFittLlamadas = retrofit.create(RetroFittLlamadas.class);
+				Call<ResultadoBuscada> call = retroFittLlamadas.getBuscador(s);
+
+				call.enqueue(new RespuestaBusqueda());
+			}
+
+			@Override
+			public boolean onQueryTextChange(String s) {
+				return false;
 			}
 		});
 
@@ -136,6 +157,20 @@ public class HomeFragment extends Fragment {
 
 	}
 
+	class RespuestaBusqueda implements Callback<ResultadoBuscada> {
+
+		@Override
+		public void onResponse(Call<ResultadoBuscada> call, Response<ResultadoBuscada> response) {
+			resultadoBuscada = response.body();
+			Log.d("algo", resultadoBuscada.getArrayModeloVideojuego().get(0).getDescripcion());
+		}
+
+		@Override
+		public void onFailure(Call<ResultadoBuscada> call, Throwable t) {
+			Toast.makeText(getContext(), "Algo ha fallado, por favor vuelva a intentarlo en otro momento.", Toast.LENGTH_LONG).show();
+		}
+	}
+
 	@Override
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		AdaptadorViewPager adaptadorTienda = new AdaptadorViewPager(getChildFragmentManager());
@@ -146,35 +181,6 @@ public class HomeFragment extends Fragment {
 
 	}
 
-	/*@Override
-	protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-		super.onActivityResult(requestCode, resultCode, data);
-
-		ArrayList<String> arrayResultado;
-		if (requestCode == VOZ){
-			if (resultCode == RESULT_OK){
-				if (data != null){
-					arrayResultado = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-					etTexto.setText(arrayResultado.get(0));
-				}
-			}
-		}
-	}*/
-
-	//Para buscar las palabras en google
-	private void realizarAcciones(String s){
-		try {
-			String palabraBuscar = URLEncoder.encode(s, "UTF-8");
-
-			//uri es una direccion de internet
-			Uri uri = Uri.parse("https://www.google.com/search?q=" + palabraBuscar);
-
-			Intent abrir = new Intent(Intent.ACTION_VIEW, uri);
-			startActivity(abrir);
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}
-	}
 
 
 	public void setAdapter(){
@@ -188,39 +194,6 @@ public class HomeFragment extends Fragment {
 		fragmentManager = getChildFragmentManager();
 	}
 
-	public Filter getFilter(){
-		return new Filter(){
-
-			@Override
-			protected FilterResults performFiltering(CharSequence charSequence) {
-				String searhString = charSequence.toString();
-
-				if(searhString.isEmpty()){
-
-					filteredarray = array;
-				}else{
-					ArrayList<Plataforma> tempFilteredList = new ArrayList<>();
-
-					for (Plataforma plataforma : array){
-
-						if(plataforma.getListaVideojuegos().contains(searhString)){
-							tempFilteredList.add(plataforma);
-						}
-					}
-					filteredarray = tempFilteredList;
-				}
-				FilterResults filterResults = new FilterResults();
-				filterResults.values = filteredarray;
-				return filterResults;
-			}
-
-			@Override
-			protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-				filteredarray = (ArrayList<Plataforma>) filterResults.values;
-				rvAdapter.notifyDataSetChanged();
-			}
-		};
-	}
 
 	@Override
 	public void onDestroyView() {
