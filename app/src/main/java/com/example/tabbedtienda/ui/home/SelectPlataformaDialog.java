@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -147,21 +148,25 @@ public class SelectPlataformaDialog extends DialogFragment {
                 call.enqueue(new Callback<List<Videojuego>>() {
                     @Override
                     public void onResponse(Call<List<Videojuego>> call, Response<List<Videojuego>> response) {
-                        ArrayList<Videojuego> videojuegos = MainActivity.mainActivity.getVideojuegos();
+                        ArrayList<Integer> videojuegos = MainActivity.mainActivity.getVideojuegos();
+                        int t = videojuegos.size();
                         for (Videojuego videojuego: response.body()) {
                             boolean esta = false;
-                            for (Videojuego v: videojuegos)
-                                if (v.getId() == videojuego.getId()){
+                            for (int v: videojuegos)
+                                if (v == videojuego.getId()){
                                     esta = true;
                                     break;
                                 }
                             if (!esta){
-                                Log.d("pasa", videojuego.getId() + "");
-                                videojuegos.add(videojuego);
+                                Toast.makeText(getContext(),"Producto Añadido al Carrito",Toast.LENGTH_SHORT).show();
+                                videojuegos.add(videojuego.getId());
                                 break;
                             }
                         }
-                        MainActivity.mainActivity.setVideojuegos(videojuegos);
+                        if (t < videojuegos.size())
+                            MainActivity.mainActivity.setVideojuegos(videojuegos);
+                        else
+                            Toast.makeText(getContext(),"Sin mas Existencias",Toast.LENGTH_SHORT).show();
                     }
                     @Override
                     public void onFailure(Call<List<Videojuego>> call, Throwable t) {

@@ -2,9 +2,11 @@ package com.example.tabbedtienda.ui.datos;
 
 import com.example.tabbedtienda.ui.models.Dispositivo;
 import com.example.tabbedtienda.ui.models.Llamadas.LlamadaDispositivo;
+import com.example.tabbedtienda.ui.models.Llamadas.LlamadaVenta;
 import com.example.tabbedtienda.ui.models.Llamadas.LlamadaVideojuego;
 import com.example.tabbedtienda.ui.models.Llamadas.Login;
 import com.example.tabbedtienda.ui.models.Llamadas.PlataformasModeloJuego;
+import com.example.tabbedtienda.ui.models.Llamadas.Respuesta;
 import com.example.tabbedtienda.ui.models.ModeloVideojuego;
 import com.example.tabbedtienda.ui.models.PeticionMarcas;
 import com.example.tabbedtienda.ui.models.Plataforma;
@@ -22,6 +24,12 @@ public interface RetroFittLlamadas {
     @GET("plataformas/stock")
     Call<List<Plataforma>> getPlataformas();
 
+    @GET("marcas/stock/telefonia")
+    Call<List<PeticionMarcas>> getTelefonia();
+
+    @GET("marcas/stock/consolas")
+    Call<List<PeticionMarcas>> getConsolas();
+
     @POST("login")
     Call<Usuario> getLogin(@Body Login login);
 
@@ -34,9 +42,9 @@ public interface RetroFittLlamadas {
     @POST("dispositivo")
     Call<List<Dispositivo>> getDispositivo(@Body LlamadaDispositivo llamadaDispositivo);
 
-    @GET("marcas/stock/telefonia")
-    Call<List<PeticionMarcas>> getTelefonia();
+    @POST("insertar/venta")
+    Call<Respuesta> setVenta(@Body LlamadaVenta llamadaVenta);
 
-    @GET("marcas/stock/consolas")
-    Call<List<PeticionMarcas>> getConsolas();
+
+
 }

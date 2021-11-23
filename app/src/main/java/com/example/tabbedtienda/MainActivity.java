@@ -23,8 +23,8 @@ public class MainActivity extends AppCompatActivity{
 	public static MainActivity mainActivity;
 	private ActivityMainBinding binding;
 	private Usuario logeado = null;
-	private ArrayList<Videojuego> videojuegos = new ArrayList<Videojuego>();
-	private ArrayList<Dispositivo> dispositivos = new ArrayList<Dispositivo>();
+	private ArrayList<Integer> videojuegos = new ArrayList<Integer>();
+	private ArrayList<Integer> dispositivos = new ArrayList<Integer>();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -48,19 +48,19 @@ public class MainActivity extends AppCompatActivity{
 		NavigationUI.setupWithNavController(binding.navView, navController);
 	}
 
-	public ArrayList<Videojuego> getVideojuegos() {
+	public ArrayList<Integer> getVideojuegos() {
 		return videojuegos;
 	}
 
-	public void setVideojuegos(ArrayList<Videojuego> videojuegos) {
+	public void setVideojuegos(ArrayList<Integer> videojuegos) {
 		this.videojuegos = videojuegos;
 	}
 
-	public ArrayList<Dispositivo> getDispositivos() {
+	public ArrayList<Integer> getDispositivos() {
 		return dispositivos;
 	}
 
-	public void setDispositivos(ArrayList<Dispositivo> dispositivos) {
+	public void setDispositivos(ArrayList<Integer> dispositivos) {
 		this.dispositivos = dispositivos;
 	}
 
