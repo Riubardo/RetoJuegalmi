@@ -1,60 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="20px">
 
-    <TextView
-        android:id="@+id/txtLogedNombre"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Paco"
-        android:textSize="24sp"
-        android:textStyle="bold" />
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/txtLogedCorreo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="algo@gmail.com" />
+        <TextView
+            android:id="@+id/txtLogedNombre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Paco"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
-    <ImageView
-        android:id="@+id/imgLogedPerfil"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:srcCompat="@tools:sample/avatars" />
+        <TextView
+            android:id="@+id/txtLogedCorreo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="algo@gmail.com" />
 
-    <Button
-        android:id="@+id/btnLogedAjustes"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Ajustes" />
+        <ImageView
+            android:id="@+id/imgLogedPerfil"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:srcCompat="@tools:sample/avatars" />
 
-    <Button
-        android:id="@+id/btnLogedCarrito"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Carrito" />
+        <Button
+            android:id="@+id/btnLogedAjustes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ajustes" />
 
-    <Button
-        android:id="@+id/btnLogedSoporte"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Soporte" />
+        <Button
+            android:id="@+id/btnLogedCarrito"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Carrito" />
 
-    <Button
-        android:id="@+id/btnLogedDeslogear"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Deslogear" />
+        <Button
+            android:id="@+id/btnLogedSoporte"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Soporte" />
 
-    <Button
-        android:id="@+id/btnLogedCancelar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Cancelar" />
+        <Button
+            android:id="@+id/btnLogedDeslogear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Deslogear" />
 
-</LinearLayout>
+        <Button
+            android:id="@+id/btnLogedCancelar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cancelar" />
+    </LinearLayout>
+
+</RelativeLayout>

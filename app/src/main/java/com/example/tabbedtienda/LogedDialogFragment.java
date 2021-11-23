@@ -1,6 +1,7 @@
 package com.example.tabbedtienda;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Base64;
@@ -15,11 +16,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.bumptech.glide.Glide;
+import com.example.tabbedtienda.ui.CarritoDialogFragment;
 import com.example.tabbedtienda.ui.models.Usuario;
 
 public class LogedDialogFragment  extends DialogFragment {
+    public FragmentManager fragmentManager;
     @Override
     public void onCancel(DialogInterface dialog)
     {
@@ -48,14 +52,18 @@ public class LogedDialogFragment  extends DialogFragment {
         else {
             ((TextView)view.findViewById(R.id.txtLogedNombre)).setText(usu.getCliente().getNombre());
             ((TextView)view.findViewById(R.id.txtLogedCorreo)).setText(usu.getCliente().getEmail());
-            byte[] bytesImage = Base64.decode(usu.getCliente().getImagen(), Base64.DEFAULT);
+            /*byte[] bytesImage = Base64.decode(usu.getCliente().getImagen(), Base64.DEFAULT);
             Log.d("img",bytesImage.length + "");
-            Glide.with(this).asBitmap().load(bytesImage).into((ImageView) view.findViewById(R.id.imgLogedPerfil));
-           // Glide.with(this).load(usu.getCliente().getImagen()).into((ImageView)view.findViewById(R.id.imgLogedPerfil));
+            Glide.with(this).asBitmap().load(bytesImage).into((ImageView) view.findViewById(R.id.imgLogedPerfil));*/
+            Glide.with(this).load(usu.getCliente().getImagen()).into((ImageView)view.findViewById(R.id.imgLogedPerfil));
         }
         return view;
     }
-
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        fragmentManager = getChildFragmentManager();
+    }
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -70,6 +78,13 @@ public class LogedDialogFragment  extends DialogFragment {
             public void onClick(View view) {
                 MainActivity.mainActivity.setLogeado(null);
                 dismiss();
+            }
+        });
+        ((Button) view.findViewById(R.id.btnLogedCarrito)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CarritoDialogFragment loged = new CarritoDialogFragment();
+                loged.show(fragmentManager,"loged");
             }
         });
     }
