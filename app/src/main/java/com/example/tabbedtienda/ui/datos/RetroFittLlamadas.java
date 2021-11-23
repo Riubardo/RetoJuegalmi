@@ -10,6 +10,7 @@ import com.example.tabbedtienda.ui.models.Llamadas.Respuesta;
 import com.example.tabbedtienda.ui.models.ModeloVideojuego;
 import com.example.tabbedtienda.ui.models.PeticionMarcas;
 import com.example.tabbedtienda.ui.models.Plataforma;
+import com.example.tabbedtienda.ui.models.ResultadoBuscada;
 import com.example.tabbedtienda.ui.models.Usuario;
 import com.example.tabbedtienda.ui.models.Videojuego;
 
@@ -45,6 +46,6 @@ public interface RetroFittLlamadas {
     @POST("insertar/venta")
     Call<Respuesta> setVenta(@Body LlamadaVenta llamadaVenta);
 
-
-
+    @POST("busqueda")
+    Call<ResultadoBuscada> getBuscador(@Body String s);
 }
