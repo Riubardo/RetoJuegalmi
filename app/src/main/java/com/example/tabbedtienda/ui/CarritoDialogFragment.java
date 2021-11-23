@@ -1,6 +1,7 @@
 package com.example.tabbedtienda.ui;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,7 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -17,8 +18,9 @@ import androidx.fragment.app.DialogFragment;
 import com.example.tabbedtienda.MainActivity;
 import com.example.tabbedtienda.R;
 import com.example.tabbedtienda.ui.datos.RetroFittLlamadas;
+import com.example.tabbedtienda.ui.home.AdaptadorListaDirecciones;
+import com.example.tabbedtienda.ui.models.Direccion;
 import com.example.tabbedtienda.ui.models.Llamadas.LlamadaVenta;
-import com.example.tabbedtienda.ui.models.Llamadas.Login;
 import com.example.tabbedtienda.ui.models.Llamadas.Respuesta;
 import com.example.tabbedtienda.ui.models.Usuario;
 import com.google.gson.Gson;
@@ -27,6 +29,7 @@ import com.google.gson.GsonBuilder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -37,6 +40,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class CarritoDialogFragment extends DialogFragment {
     private Button botonVerificar = null;
     private Button botonCancelar = null;
+    private Spinner spDirecciones = null;
+    private Context context;
+    private List<Direccion> direcciones  = new ArrayList<>();
+    private AdaptadorListaDirecciones adaptador;
+
     public CarritoDialogFragment()
     {
         super();
@@ -62,21 +70,52 @@ public class CarritoDialogFragment extends DialogFragment {
         dialog.setTitle("Carrito");
         return dialog;
     }
-    public void cargarDatos(String nomb, String contra){
-
+    private void CargarContenido(){
+        Gson gson = new GsonBuilder()
+                .setLenient()
+                .create();
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://arkadio.duckdns.org/ws/")
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build();
+        RetroFittLlamadas retroFittLlamadas = retrofit.create(RetroFittLlamadas.class);
+        Call<List<Direccion>> call = retroFittLlamadas.getDirecciones(MainActivity.mainActivity.getLogeado().getCliente());
+        call.enqueue(new Callback<List<Direccion>>() {
+            @Override
+            public void onResponse(Call<List<Direccion>> call, Response<List<Direccion>> response) {
+                Log.d("pasa", "aqui");
+                direcciones = response.body();
+                adaptador.setDirecciones(direcciones);
+            }
+            @Override
+            public void onFailure(Call<List<Direccion>> call, Throwable t) {
+                Log.d("pasa", "error");
+                t.printStackTrace();
+            }
+        });
+    }
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        this.context=context;
     }
     //Crear la vista (instancias etc)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         View vista = (View)inflater.inflate(R.layout.dialog_carrito, container,false);
+        spDirecciones = vista.findViewById(R.id.spCarritoDirecciones);
+        adaptador=new AdaptadorListaDirecciones(context, R.layout.texto_adapter, direcciones);
+        spDirecciones.setAdapter(adaptador);
         botonCancelar = vista.findViewById(R.id.btnCarritoCancelar);
         botonVerificar = vista.findViewById(R.id.btnCarritoAceptar);
+        CargarContenido();
         return vista;
     }
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState)
     {
+
         //-----> CANCELAR
         botonCancelar.setOnClickListener(new View.OnClickListener()
         {

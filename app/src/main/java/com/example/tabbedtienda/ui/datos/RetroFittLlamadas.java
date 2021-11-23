@@ -1,6 +1,9 @@
 package com.example.tabbedtienda.ui.datos;
 
+import com.example.tabbedtienda.ui.models.Cliente;
+import com.example.tabbedtienda.ui.models.Direccion;
 import com.example.tabbedtienda.ui.models.Dispositivo;
+import com.example.tabbedtienda.ui.models.Llamadas.LlamadaBusqueda;
 import com.example.tabbedtienda.ui.models.Llamadas.LlamadaDispositivo;
 import com.example.tabbedtienda.ui.models.Llamadas.LlamadaVenta;
 import com.example.tabbedtienda.ui.models.Llamadas.LlamadaVideojuego;
@@ -34,6 +37,9 @@ public interface RetroFittLlamadas {
     @POST("login")
     Call<Usuario> getLogin(@Body Login login);
 
+    @POST("busqueda")
+    Call<ResultadoBuscada> getBusqueda(@Body LlamadaBusqueda llamadaBusqueda);
+
     @POST("plataformas/modeloJuego")
     Call<List<Plataforma>> getPlataformasModeloJuego(@Body PlataformasModeloJuego plataformasModeloJuego);
 
@@ -42,6 +48,9 @@ public interface RetroFittLlamadas {
 
     @POST("dispositivo")
     Call<List<Dispositivo>> getDispositivo(@Body LlamadaDispositivo llamadaDispositivo);
+
+    @POST("direcciones/usuario")
+    Call<List<Direccion>> getDirecciones(@Body Cliente cliente);
 
     @POST("insertar/venta")
     Call<Respuesta> setVenta(@Body LlamadaVenta llamadaVenta);
