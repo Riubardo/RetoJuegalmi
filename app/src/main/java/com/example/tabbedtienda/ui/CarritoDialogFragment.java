@@ -3,11 +3,13 @@ package com.example.tabbedtienda.ui;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
@@ -15,10 +17,16 @@ import androidx.fragment.app.DialogFragment;
 import com.example.tabbedtienda.MainActivity;
 import com.example.tabbedtienda.R;
 import com.example.tabbedtienda.ui.datos.RetroFittLlamadas;
+import com.example.tabbedtienda.ui.models.Llamadas.LlamadaVenta;
 import com.example.tabbedtienda.ui.models.Llamadas.Login;
+import com.example.tabbedtienda.ui.models.Llamadas.Respuesta;
 import com.example.tabbedtienda.ui.models.Usuario;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -55,33 +63,7 @@ public class CarritoDialogFragment extends DialogFragment {
         return dialog;
     }
     public void cargarDatos(String nomb, String contra){
-        Gson gson = new GsonBuilder()
-                .setLenient()
-                .create();
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://arkadio.duckdns.org/ws/")
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .build();
-        RetroFittLlamadas retroFittLlamadas = retrofit.create(RetroFittLlamadas.class);
-        Login login = new Login(nomb, contra);
-        Call<Usuario> call = retroFittLlamadas.getLogin(login);
-        call.enqueue(new Callback<Usuario>() {
-            @Override
-            public void onResponse(Call<Usuario> call, Response<Usuario> response) {
-                if(response.isSuccessful()) {
-                    Usuario usuario = response.body();
-                    if (usuario.getCliente() != null || usuario.getTrabajador() != null)
-                        MainActivity.mainActivity.setLogeado(usuario);
-                } else {
-                    System.out.println(response.errorBody());
-                }
-            }
 
-            @Override
-            public void onFailure(Call<Usuario> call, Throwable t) {
-                t.printStackTrace();
-            }
-        });
     }
     //Crear la vista (instancias etc)
     @Override
@@ -111,7 +93,35 @@ public class CarritoDialogFragment extends DialogFragment {
             @Override
             public void onClick(View v)
             {
-
+                Gson gson = new GsonBuilder()
+                        .setLenient()
+                        .create();
+                Retrofit retrofit = new Retrofit.Builder()
+                        .baseUrl("https://arkadio.duckdns.org/ws/")
+                        .addConverterFactory(GsonConverterFactory.create(gson))
+                        .build();
+                RetroFittLlamadas retroFittLlamadas = retrofit.create(RetroFittLlamadas.class);
+                Usuario logeado = MainActivity.mainActivity.getLogeado();
+                SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy");
+                Calendar c = Calendar.getInstance();
+                String fecha = fmt.format(c.getTime());
+                c.add(Calendar.DATE, 3);
+                String fechafin = fmt.format(c.getTime());
+                LlamadaVenta llamadaVenta = new LlamadaVenta(logeado.getCliente().getId(), 1, fecha, fechafin, MainActivity.mainActivity.getVideojuegos(), MainActivity.mainActivity.getDispositivos());
+                Call<Respuesta> call = retroFittLlamadas.setVenta(llamadaVenta);
+                call.enqueue(new Callback<Respuesta>() {
+                    @Override
+                    public void onResponse(Call<Respuesta> call, Response<Respuesta> response) {
+                        Toast.makeText(getContext(),"Compra Realizada",Toast.LENGTH_SHORT).show();
+                        MainActivity.mainActivity.setVideojuegos(new ArrayList<>());
+                        MainActivity.mainActivity.setDispositivos(new ArrayList<>());
+                    }
+                    @Override
+                    public void onFailure(Call<Respuesta> call, Throwable t) {
+                        Toast.makeText(getContext(),"Error en la Compra",Toast.LENGTH_SHORT).show();
+                        t.printStackTrace();
+                    }
+                });
                 dismiss();
             }
         });

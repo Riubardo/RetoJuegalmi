@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
@@ -106,22 +107,26 @@ public class DispositivoDialog extends DialogFragment {
 				call.enqueue(new Callback<List<Dispositivo>>() {
 					@Override
 					public void onResponse(Call<List<Dispositivo>> call, Response<List<Dispositivo>> response) {
-						ArrayList<Dispositivo> dispositivos = MainActivity.mainActivity.getDispositivos();
+						ArrayList<Integer> dispositivos = MainActivity.mainActivity.getDispositivos();
+						int t = dispositivos.size();
 						for (Dispositivo dispositivo: response.body()) {
 							Log.d("pasa", "aqui");
 							boolean esta = false;
-							for (Dispositivo d: dispositivos)
-								if (d.getId() == dispositivo.getId()){
+							for (int d: dispositivos)
+								if (d == dispositivo.getId()){
 									esta = true;
 									break;
 								}
-								if (!esta) {
-									Log.d("pasa", dispositivo.getId() + "");
-									dispositivos.add(dispositivo);
-									break;
-								}
+							if (!esta) {
+								Toast.makeText(getContext(),"Producto Añadido al Carrito",Toast.LENGTH_SHORT).show();
+								dispositivos.add(dispositivo.getId());
+								break;
+							}
 						}
-						MainActivity.mainActivity.setDispositivos(dispositivos);
+						if (t < dispositivos.size())
+							MainActivity.mainActivity.setDispositivos(dispositivos);
+						else
+							Toast.makeText(getContext(),"Sin mas Existencias",Toast.LENGTH_SHORT).show();
 					}
 					@Override
 					public void onFailure(Call<List<Dispositivo>> call, Throwable t) {
