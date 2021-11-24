@@ -24,10 +24,7 @@ import com.example.tabbedtienda.R;
 import com.example.tabbedtienda.ui.datos.RetroFittLlamadas;
 import com.example.tabbedtienda.ui.models.Dispositivo;
 import com.example.tabbedtienda.ui.models.Llamadas.LlamadaDispositivo;
-import com.example.tabbedtienda.ui.models.Llamadas.LlamadaVideojuego;
 import com.example.tabbedtienda.ui.models.ModeloDispositivo;
-import com.example.tabbedtienda.ui.models.ModeloVideojuego;
-import com.example.tabbedtienda.ui.models.Videojuego;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -82,7 +79,7 @@ public class DispositivoDialog extends DialogFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 	{
 		View vista = (View) inflater.inflate(R.layout.dialog_ver_producto, container, false);
-		flechaAtras = (ImageButton) vista.findViewById(R.id.flechaAtras);
+		flechaAtras = (ImageButton) vista.findViewById(R.id.flechaAtrass);
 		tvNombreDispositivo = (TextView) vista.findViewById(R.id.nombreProducto);
 		ivImagenDispositivo = (ImageView) vista.findViewById(R.id.imagenProducto);
 		tvDescripcionDispositivo = (TextView) vista.findViewById(R.id.descripcionProducto);

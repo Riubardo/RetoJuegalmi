@@ -61,7 +61,7 @@ public class MarcaDialog extends DialogFragment {
 	{
 		View vista = (View) inflater.inflate(R.layout.dialog_ver_marca, container, false);
 
-		flechaAtras = (ImageButton) vista.findViewById(R.id.flechaAtras);
+		flechaAtras = (ImageButton) vista.findViewById(R.id.flechaAtrass);
 		tvNombreMarca = (TextView) vista.findViewById(R.id.tvNombreMarca);
 		recyclerViewDispositivo = (RecyclerView) vista.findViewById(R.id.rvDispositivoVerMarca);
 		return vista;

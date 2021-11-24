@@ -109,6 +109,11 @@ public class HomeFragment extends Fragment {
 				call.enqueue(new Callback<ResultadoBuscada>() {
 					@Override
 					public void onResponse(Call<ResultadoBuscada> call, Response<ResultadoBuscada> response) {
+						resultadoBuscada = response.body();
+
+						Intent intent = new Intent(getActivity(), VentanaBusqueda.class);
+						startActivity(intent);
+
 						Log.d("pasa", response.body().getArrayModeloDispositivo().size() + ", " + response.body().getArrayModeloVideojuego().size());
 						Toast.makeText(getContext(),"Buscando",Toast.LENGTH_SHORT).show();
 					}
