@@ -6,6 +6,7 @@ import com.example.tabbedtienda.ui.models.Dispositivo;
 import com.example.tabbedtienda.ui.models.Llamadas.LlamadaBusqueda;
 import com.example.tabbedtienda.ui.models.Llamadas.LlamadaDireccion;
 import com.example.tabbedtienda.ui.models.Llamadas.LlamadaDispositivo;
+import com.example.tabbedtienda.ui.models.Llamadas.LlamadaLocation;
 import com.example.tabbedtienda.ui.models.Llamadas.LlamadaVenta;
 import com.example.tabbedtienda.ui.models.Llamadas.LlamadaVideojuego;
 import com.example.tabbedtienda.ui.models.Llamadas.Login;
@@ -24,6 +25,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 
 public interface RetroFittLlamadas {
     @GET("plataformas/stock")
@@ -50,9 +52,12 @@ public interface RetroFittLlamadas {
     @POST("direcciones/usuario")
     Call<List<Direccion>> getDirecciones(@Body LlamadaDireccion llamadaDireccion);
 
+    @POST("busqueda")
+    Call<ResultadoBuscada> getBuscador(@Body LlamadaBusqueda llamadaBusqueda);
+
     @POST("insertar/venta")
     Call<Respuesta> setVenta(@Body LlamadaVenta llamadaVenta);
 
-    @POST("busqueda")
-    Call<ResultadoBuscada> getBuscador(@Body LlamadaBusqueda llamadaBusqueda);
+    @PUT("update/cliente")
+    Call<Respuesta> updateLocalizacion(@Body LlamadaLocation llamadaLocation);
 }

@@ -1,16 +1,19 @@
 package com.example.tabbedtienda.ui.models.Llamadas;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Respuesta {
-    private String statuss;
+    @SerializedName("status")
+    private String status;
 
     public Respuesta() {
     }
 
-    public String getStatuss() {
-        return statuss;
+    public String getStatus() {
+        return status;
     }
 
     public void setStatuss(String statuss) {
-        this.statuss = statuss;
+        this.status = statuss;
     }
 }
