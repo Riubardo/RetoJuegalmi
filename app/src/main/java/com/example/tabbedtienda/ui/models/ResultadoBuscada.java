@@ -2,11 +2,12 @@ package com.example.tabbedtienda.ui.models;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import retrofit2.Callback;
 
-public class ResultadoBuscada {
+public class ResultadoBuscada implements Serializable {
     @SerializedName("videojuegos")
     ArrayList<ModeloVideojuego> arrayModeloVideojuego;
     @SerializedName("dispositivos")

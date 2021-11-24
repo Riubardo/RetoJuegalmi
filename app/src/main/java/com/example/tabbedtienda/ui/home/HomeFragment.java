@@ -22,6 +22,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -91,7 +92,15 @@ public class HomeFragment extends Fragment {
 		buscador.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 			@Override
 			public boolean onQueryTextSubmit(String s) {
-				buscar(s);
+				//buscar(s);
+				//Abrir fragment VentanaBusqueda, hay que pasarle resultadoBuscada?
+				VentanaBusqueda vb=VentanaBusqueda.newInstance(resultadoBuscada);
+				FragmentManager fm =getChildFragmentManager();
+				FragmentTransaction fragmentTransaction = fm.beginTransaction();
+				fragmentTransaction.replace(R.id.cambio, vb);
+				fragmentTransaction.commit();
+
+
 				return false;
 			}
 
@@ -111,10 +120,11 @@ public class HomeFragment extends Fragment {
 					public void onResponse(Call<ResultadoBuscada> call, Response<ResultadoBuscada> response) {
 						resultadoBuscada = response.body();
 
-						Intent intent = new Intent(getActivity(), VentanaBusqueda.class);
-						startActivity(intent);
 
-						Log.d("pasa", response.body().getArrayModeloDispositivo().size() + ", " + response.body().getArrayModeloVideojuego().size());
+
+
+
+						//Log.d("pasa", response.body().getArrayModeloDispositivo().size() + ", " + response.body().getArrayModeloVideojuego().size());
 						Toast.makeText(getContext(),"Buscando",Toast.LENGTH_SHORT).show();
 					}
 					@Override
