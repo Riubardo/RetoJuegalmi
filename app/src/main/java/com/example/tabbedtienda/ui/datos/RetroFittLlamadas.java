@@ -54,5 +54,5 @@ public interface RetroFittLlamadas {
     Call<Respuesta> setVenta(@Body LlamadaVenta llamadaVenta);
 
     @POST("busqueda")
-    Call<ResultadoBuscada> getBuscador(@Body String s);
+    Call<ResultadoBuscada> getBuscador(@Body LlamadaBusqueda llamadaBusqueda);
 }

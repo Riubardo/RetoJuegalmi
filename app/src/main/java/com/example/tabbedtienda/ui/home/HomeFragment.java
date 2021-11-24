@@ -36,6 +36,8 @@ import com.example.tabbedtienda.ui.datos.ModelajeJSON;
 import com.example.tabbedtienda.databinding.FragmentHomeBinding;
 import com.example.tabbedtienda.ui.datos.ModelajeJSON;
 import com.example.tabbedtienda.ui.datos.RetroFittLlamadas;
+import com.example.tabbedtienda.ui.models.Llamadas.LlamadaBusqueda;
+import com.example.tabbedtienda.ui.models.Llamadas.Respuesta;
 import com.example.tabbedtienda.ui.models.PeticionMarcas;
 import com.example.tabbedtienda.ui.models.Plataforma;
 import com.example.tabbedtienda.ui.models.ResultadoBuscada;
@@ -102,9 +104,20 @@ public class HomeFragment extends Fragment {
 						.addConverterFactory(GsonConverterFactory.create(gson))
 						.build();
 				RetroFittLlamadas retroFittLlamadas = retrofit.create(RetroFittLlamadas.class);
-				Call<ResultadoBuscada> call = retroFittLlamadas.getBuscador(s);
+				Call<ResultadoBuscada> call = retroFittLlamadas.getBuscador(new LlamadaBusqueda(s));
 
-				call.enqueue(new RespuestaBusqueda());
+				call.enqueue(new Callback<ResultadoBuscada>() {
+					@Override
+					public void onResponse(Call<ResultadoBuscada> call, Response<ResultadoBuscada> response) {
+						Log.d("pasa", response.body().getArrayModeloDispositivo().size() + ", " + response.body().getArrayModeloVideojuego().size());
+						Toast.makeText(getContext(),"Buscando",Toast.LENGTH_SHORT).show();
+					}
+					@Override
+					public void onFailure(Call<ResultadoBuscada> call, Throwable t) {
+						Toast.makeText(getContext(),"Error en la Busqueda",Toast.LENGTH_SHORT).show();
+						t.printStackTrace();
+					}
+				});
 			}
 
 			@Override
