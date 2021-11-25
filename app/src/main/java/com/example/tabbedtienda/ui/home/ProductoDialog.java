@@ -18,23 +18,11 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.tabbedtienda.MainActivity;
 import com.example.tabbedtienda.R;
-import com.example.tabbedtienda.ui.datos.RetroFittLlamadas;
-import com.example.tabbedtienda.ui.models.Llamadas.Login;
 import com.example.tabbedtienda.ui.models.ModeloVideojuego;
 import com.example.tabbedtienda.ui.models.Plataforma;
-import com.example.tabbedtienda.ui.models.Usuario;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ProductoDialog extends DialogFragment {
 
@@ -78,7 +66,7 @@ public class ProductoDialog extends DialogFragment {
 	{
 		View vista = (View) inflater.inflate(R.layout.dialog_ver_producto, container, false);
 
-		flechaAtras = (ImageButton) vista.findViewById(R.id.flechaAtras);
+		flechaAtras = (ImageButton) vista.findViewById(R.id.flechaAtrass);
 		tvNombreProducto = (TextView) vista.findViewById(R.id.nombreProducto);
 		ivImagenProducto = (ImageView) vista.findViewById(R.id.imagenProducto);
 		tvDescripcionProducto = (TextView) vista.findViewById(R.id.descripcionProducto);

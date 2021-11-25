@@ -61,7 +61,7 @@ public class CategoriaDialog extends DialogFragment {
 	{
 		View vista = (View) inflater.inflate(R.layout.dialog_ver_categoria, container, false);
 
-		flechaAtras = (ImageButton) vista.findViewById(R.id.flechaAtras);
+		flechaAtras = (ImageButton) vista.findViewById(R.id.flechaAtrass);
 		tvNombreCategoria = (TextView) vista.findViewById(R.id.tvNombreCategoria);
 		recyclerViewVideojuego = (RecyclerView) vista.findViewById(R.id.rvVideojuegoVerCategoria);
 		return vista;

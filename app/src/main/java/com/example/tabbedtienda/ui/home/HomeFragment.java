@@ -22,6 +22,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -91,33 +92,10 @@ public class HomeFragment extends Fragment {
 		buscador.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 			@Override
 			public boolean onQueryTextSubmit(String s) {
-				buscar(s);
+				VentanaBusqueda dialogoBusqueda = new VentanaBusqueda(s);
+				dialogoBusqueda.show(fragmentManager, "busquedas");
+
 				return false;
-			}
-
-			private void buscar(String s) {
-				Gson gson = new GsonBuilder()
-						.setLenient()
-						.create();
-				Retrofit retrofit = new Retrofit.Builder()
-						.baseUrl("https://arkadio.duckdns.org/ws/")
-						.addConverterFactory(GsonConverterFactory.create(gson))
-						.build();
-				RetroFittLlamadas retroFittLlamadas = retrofit.create(RetroFittLlamadas.class);
-				Call<ResultadoBuscada> call = retroFittLlamadas.getBuscador(new LlamadaBusqueda(s));
-
-				call.enqueue(new Callback<ResultadoBuscada>() {
-					@Override
-					public void onResponse(Call<ResultadoBuscada> call, Response<ResultadoBuscada> response) {
-						Log.d("pasa", response.body().getArrayModeloDispositivo().size() + ", " + response.body().getArrayModeloVideojuego().size());
-						Toast.makeText(getContext(),"Buscando",Toast.LENGTH_SHORT).show();
-					}
-					@Override
-					public void onFailure(Call<ResultadoBuscada> call, Throwable t) {
-						Toast.makeText(getContext(),"Error en la Busqueda",Toast.LENGTH_SHORT).show();
-						t.printStackTrace();
-					}
-				});
 			}
 
 			@Override
@@ -147,19 +125,6 @@ public class HomeFragment extends Fragment {
 
 	}
 
-	class RespuestaBusqueda implements Callback<ResultadoBuscada> {
-
-		@Override
-		public void onResponse(Call<ResultadoBuscada> call, Response<ResultadoBuscada> response) {
-			resultadoBuscada = response.body();
-			//Log.d("algo", resultadoBuscada.getArrayModeloVideojuego().get(0).getDescripcion());
-		}
-
-		@Override
-		public void onFailure(Call<ResultadoBuscada> call, Throwable t) {
-			Toast.makeText(getContext(), "Algo ha fallado, por favor vuelva a intentarlo en otro momento.", Toast.LENGTH_LONG).show();
-		}
-	}
 
 	@Override
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
