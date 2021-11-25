@@ -21,9 +21,11 @@ import com.example.tabbedtienda.R;
 import com.example.tabbedtienda.ui.datos.RetroFittLlamadas;
 import com.example.tabbedtienda.ui.home.AdaptadorListaDirecciones;
 import com.example.tabbedtienda.ui.models.Direccion;
+import com.example.tabbedtienda.ui.models.Llamadas.LlamadaDeleteDirection;
 import com.example.tabbedtienda.ui.models.Llamadas.LlamadaDireccion;
 import com.example.tabbedtienda.ui.models.Llamadas.LlamadaVenta;
 import com.example.tabbedtienda.ui.models.Llamadas.Respuesta;
+import com.example.tabbedtienda.ui.models.Tiene;
 import com.example.tabbedtienda.ui.models.Usuario;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -42,10 +44,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class CarritoDialogFragment extends DialogFragment {
     private Button botonVerificar = null;
     private Button botonCancelar = null;
+    private Button botonBorrar = null;
     private Spinner spDirecciones = null;
     private Context context;
     private List<Direccion> direcciones  = new ArrayList<>();
-    private int dirid;
+    private int dirid, tieneid;
     private AdaptadorListaDirecciones adaptador;
 
     public CarritoDialogFragment()
@@ -87,7 +90,7 @@ public class CarritoDialogFragment extends DialogFragment {
         call.enqueue(new Callback<List<Direccion>>() {
             @Override
             public void onResponse(Call<List<Direccion>> call, Response<List<Direccion>> response) {
-                 direcciones = response.body();
+                direcciones = response.body();
                 adaptador.setDirecciones(direcciones);
             }
             @Override
@@ -111,6 +114,7 @@ public class CarritoDialogFragment extends DialogFragment {
         spDirecciones.setAdapter(adaptador);
         botonCancelar = vista.findViewById(R.id.btnCarritoCancelar);
         botonVerificar = vista.findViewById(R.id.btnCarritoAceptar);
+        botonBorrar = vista.findViewById(R.id.btnCarritoBorrar);
         if (MainActivity.mainActivity.getVideojuegos().size() <=0 && MainActivity.mainActivity.getDispositivos().size() <=0)
             botonVerificar.setEnabled(false);
         CargarContenido();
@@ -122,12 +126,41 @@ public class CarritoDialogFragment extends DialogFragment {
         spDirecciones.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                botonBorrar.setEnabled(true);
+                botonVerificar.setEnabled(true);
                 dirid = direcciones.get(i).getId();
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-                dirid = direcciones.get(0).getId();
+                botonBorrar.setEnabled(false);
+                botonVerificar.setEnabled(false);
+                dirid = -1;
+            }
+        });
+        botonBorrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                botonBorrar.setEnabled(false);
+
+                Gson gson = new GsonBuilder().setLenient().create();
+                Retrofit retrofit = new Retrofit.Builder().baseUrl("https://arkadio.duckdns.org/ws/").addConverterFactory(GsonConverterFactory.create(gson)).build();
+                RetroFittLlamadas retroFittLlamadas = retrofit.create(RetroFittLlamadas.class);
+                Usuario logeado = MainActivity.mainActivity.getLogeado();
+                Call<Respuesta> call2 = retroFittLlamadas.deleteItem(logeado.getCliente().getId(), dirid);
+                call2.enqueue(new Callback<Respuesta>() {
+                    @Override
+                    public void onResponse(Call<Respuesta> call, Response<Respuesta> response) {
+                        Toast.makeText(getContext(),"Direccion Eliminada",Toast.LENGTH_SHORT).show();
+                        direcciones.remove(spDirecciones.getSelectedItemPosition());
+                        adaptador.setDirecciones(direcciones);
+                    }
+                    @Override
+                    public void onFailure(Call<Respuesta> call, Throwable t) {
+                        Toast.makeText(getContext(),"Error al Borrar la Dirección",Toast.LENGTH_SHORT).show();
+                        t.printStackTrace();
+                    }
+                });
             }
         });
         //-----> CANCELAR
