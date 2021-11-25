@@ -71,7 +71,7 @@ public class VentanaBusqueda extends DialogFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.dialogo_busqueda, null);
-        adaptadorResultadosBusqueda = new AdaptadorResultadosBusqueda(getContext(), resultadoBuscada);
+        adaptadorResultadosBusqueda = new AdaptadorResultadosBusqueda(this, resultadoBuscada);
 
         recycler = view.findViewById(R.id.videojuegosBusqueda);
         recycler.setAdapter(adaptadorResultadosBusqueda);

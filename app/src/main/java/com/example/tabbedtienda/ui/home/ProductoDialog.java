@@ -2,6 +2,7 @@ package com.example.tabbedtienda.ui.home;
 
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
@@ -34,6 +36,7 @@ public class ProductoDialog extends DialogFragment {
 	private Spinner spPlataformas;
 	private ArrayList<Plataforma> plataformas;
 	private ModeloVideojuego modeloVideojuego;
+	private Context miContexto;
 
 	//-----> Cosas del Recycler
 	RecyclerView recyclerViewVideojuego;
@@ -91,7 +94,7 @@ public class ProductoDialog extends DialogFragment {
 
 		//-----> DATOS VIDEOJUEGO
 		tvNombreProducto.setText(modeloVideojuego.getNombre());
-		Glide.with(fragment.getContext()).load(modeloVideojuego.getImagen()).centerCrop().into(ivImagenProducto);
+		Glide.with(miContexto).load(modeloVideojuego.getImagen()).centerCrop().into(ivImagenProducto);
 		tvDescripcionProducto.setText(modeloVideojuego.getDescripcion());
 		return vista;
 	}
@@ -107,5 +110,12 @@ public class ProductoDialog extends DialogFragment {
 				dismiss();
 			}
 		});
+	}
+
+
+	@Override
+	public void onAttach(@NonNull Context context) {
+		super.onAttach(context);
+		miContexto=context;
 	}
 }
