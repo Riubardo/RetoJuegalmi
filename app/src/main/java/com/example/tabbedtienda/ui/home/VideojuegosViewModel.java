@@ -6,6 +6,8 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.tabbedtienda.MainActivity;
+import com.example.tabbedtienda.ui.datos.LoadingDialogManager;
 import com.example.tabbedtienda.ui.datos.RetroFittLlamadas;
 import com.example.tabbedtienda.ui.models.Plataforma;
 import com.google.gson.Gson;
@@ -30,6 +32,10 @@ public class VideojuegosViewModel extends ViewModel implements Callback<List<Pla
 		mText.setValue("This is Videojuegos fragment");
 	}
 	public void devuelveLista(){
+
+		//-----> MOSTRAR DIALOGO
+		MainActivity.dialogoCargando.cargarDialogo();
+
 		Gson gson = new GsonBuilder()
 				.setLenient()
 				.create();
@@ -56,16 +62,26 @@ public class VideojuegosViewModel extends ViewModel implements Callback<List<Pla
 
 	@Override
 	public void onResponse(Call<List<Plataforma>> call, Response<List<Plataforma>> response) {
+
+		//-----> CERRAR DIALOGO
+		MainActivity.dialogoCargando.cerrarDialogo();
+
 		if(response.isSuccessful()) {
 			videojuegosFragment.listaPlataformas = response.body();
 			Log.e("", ""+videojuegosFragment.listaPlataformas.size());
 			videojuegosFragment.setAdapter();
+
+
 		} else {
 			System.out.println(response.errorBody());
 		}
 	}
 	@Override
 	public void onFailure(Call<List<Plataforma>> call, Throwable t) {
+
+		//-----> CERRAR DIALOGO
+		MainActivity.dialogoCargando.cerrarDialogo();
 		t.printStackTrace();
+
 	}
 }

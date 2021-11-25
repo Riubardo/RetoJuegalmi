@@ -13,6 +13,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.example.tabbedtienda.databinding.ActivityMainBinding;
+import com.example.tabbedtienda.ui.datos.LoadingDialogManager;
 import com.example.tabbedtienda.ui.datos.RetroFittLlamadas;
 import com.example.tabbedtienda.ui.models.Dispositivo;
 import com.example.tabbedtienda.ui.models.Llamadas.LlamadaBusqueda;
@@ -48,15 +49,19 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity{
 	public static MainActivity mainActivity;
+	public static LoadingDialogManager dialogoCargando;
 	private ActivityMainBinding binding;
 	private Usuario logeado = null;
 	private ArrayList<Integer> videojuegos = new ArrayList<Integer>();
 	private ArrayList<Integer> dispositivos = new ArrayList<Integer>();
 
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		mainActivity = this;
+		dialogoCargando = new LoadingDialogManager(this);
+
 		binding = ActivityMainBinding.inflate(getLayoutInflater());
 		setContentView(binding.getRoot());
 

@@ -1,11 +1,13 @@
 package com.example.tabbedtienda.ui.home;
 
+import android.content.Intent;
 import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.tabbedtienda.MainActivity;
 import com.example.tabbedtienda.ui.datos.RetroFittLlamadas;
 import com.example.tabbedtienda.ui.models.PeticionMarcas;
 import com.google.gson.Gson;
@@ -30,6 +32,14 @@ public class ConsolasViewModel extends ViewModel implements Callback<List<Petici
 		mText.setValue("This is Consolas fragment");
 	}
 	public void devuelveLista(){
+		/*
+		AsyncTaskClass async = new AsynTaskManager().getInstance(consolasFragment.getContext());
+		async.setConsolasFragment(this.consolasFragment);
+		async.execute();
+		*/
+
+		//-----> MOSTRAR DIALOGO
+		//MainActivity.dialogoCargando.cargarDialogo();
 		Gson gson = new GsonBuilder()
 				.setLenient()
 				.create();
@@ -40,6 +50,7 @@ public class ConsolasViewModel extends ViewModel implements Callback<List<Petici
 		RetroFittLlamadas retroFittLlamadas = retrofit.create(RetroFittLlamadas.class);
 		Call<List<PeticionMarcas>> call = retroFittLlamadas.getConsolas();
 		call.enqueue(this);
+
 
 	}
 	public LiveData<String> getText() {
@@ -60,12 +71,18 @@ public class ConsolasViewModel extends ViewModel implements Callback<List<Petici
 			consolasFragment.listaMarcas = response.body();
 			Log.e("", ""+consolasFragment.listaMarcas.size());
 			consolasFragment.setAdapter();
+
+			//-----> CERRAR DIALOGO
+			//MainActivity.dialogoCargando.cerrarDialogo();
 		} else {
 			System.out.println(response.errorBody());
 		}
 	}
 	@Override
 	public void onFailure(Call<List<PeticionMarcas>> call, Throwable t) {
+
+		//-----> CERRAR DIALOGO
+		MainActivity.dialogoCargando.cerrarDialogo();
 		t.printStackTrace();
 	}
 }

@@ -24,7 +24,7 @@ public class ConsolasFragment extends Fragment {
 	RecyclerView recyclerView;
 	RecyclerView.Adapter rvAdapter;
 	RecyclerView.LayoutManager rvLayoutManger;
-	List<PeticionMarcas> listaMarcas;
+	public List<PeticionMarcas> listaMarcas;
 	Context context;
 	public FragmentManager fragmentManager;
 	private ConsolasViewModel consolasViewModel;
