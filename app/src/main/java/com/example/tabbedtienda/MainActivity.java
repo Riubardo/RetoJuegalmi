@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.example.tabbedtienda.databinding.ActivityMainBinding;
+import com.example.tabbedtienda.ui.datos.FailDialogManager;
+import com.example.tabbedtienda.ui.datos.LoadingDialogManager;
 import com.example.tabbedtienda.ui.models.Dispositivo;
 import com.example.tabbedtienda.ui.models.Usuario;
 import com.example.tabbedtienda.ui.models.ModeloVideojuego;
@@ -21,15 +23,21 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity{
 	public static MainActivity mainActivity;
+	public static LoadingDialogManager dialogoCargando;
+	public static FailDialogManager dialogoFail;
 	private ActivityMainBinding binding;
 	private Usuario logeado = null;
 	private ArrayList<Integer> videojuegos = new ArrayList<Integer>();
 	private ArrayList<Integer> dispositivos = new ArrayList<Integer>();
 
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		mainActivity = this;
+		dialogoCargando = new LoadingDialogManager(this);
+		dialogoFail = new FailDialogManager(this);
+
 		binding = ActivityMainBinding.inflate(getLayoutInflater());
 		setContentView(binding.getRoot());
 
